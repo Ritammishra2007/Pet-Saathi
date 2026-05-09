@@ -28,7 +28,7 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Nunito', sans-serif;
-  background: linear-gradient(160deg, #F8F3EE 0%, #F3E8E3 45%, #ECE7F5 100%);
+  background: #1a1a2e;
   color: var(--text-dark);
   min-height: 100vh;
   overflow-x: hidden;

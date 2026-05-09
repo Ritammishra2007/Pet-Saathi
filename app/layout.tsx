@@ -13,8 +13,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="h-full">
-      <body className="min-h-full flex flex-col antialiased">{children}</body>
+    <html lang="en">
+      <body style={{ margin: 0, padding: 0, minHeight: "100vh", background: "#1a1a2e" }}>
+        <div style={{
+          maxWidth: "430px",
+          minHeight: "100vh",
+          margin: "0 auto",
+          background: "#F4F2EF",
+          position: "relative",
+          boxShadow: "0 0 60px rgba(0,0,0,0.5)",
+          display: "flex",
+          flexDirection: "column",
+        }}>
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
