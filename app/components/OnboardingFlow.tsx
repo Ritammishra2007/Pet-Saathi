@@ -150,21 +150,34 @@ export default function OnboardingFlow() {
         {step === "auth" && (
           <div className="step-content center-step">
             <div className="auth-hero">
-              <Image src="/dog-cat.webp" alt="Pets" fill
+              <Image src="/landing_page.jpg" alt="Pets" fill
                 style={{ objectFit: "cover", objectPosition: "center top" }} priority />
               <div className="auth-hero-fade" />
+
+              {/* Top left logo */}
+              <div style={{ position: "absolute", top: "16px", left: "16px", zIndex: 3 }}>
+                <Image src="/icon.png" alt="Pet Sathi" width={110} height={110} style={{ objectFit: "contain", filter: "drop-shadow(0 4px 16px rgba(0,0,0,0.2))" }} />
+              </div>
+
+              {/* Top right badge */}
+              <div style={{ position: "absolute", top: "16px", right: "16px", zIndex: 3 }}>
+                <div style={{ background: "rgba(255,255,255,0.92)", borderRadius: "20px", padding: "6px 12px", display: "flex", alignItems: "center", gap: "6px", boxShadow: "0 2px 10px rgba(0,0,0,0.12)" }}>
+                  <span style={{ fontSize: "14px" }}>🐾</span>
+                  <span style={{ fontSize: "12px", fontWeight: 800, color: "#1A2535" }}>Trusted by many pet parents 🧡</span>
+                </div>
+              </div>
+
+              {/* Headline */}
               <div className="auth-logo-wrap">
-                <div className="logo-pill">🐾 Pet Sathi</div>
                 <h1 className="auth-headline">
                   Your pet&apos;s best life<br />
                   <span className="orange-text">starts here.</span>
                 </h1>
+                <div style={{ width: "60px", height: "3px", background: "#FF8A1F", borderRadius: "4px", marginTop: "6px" }} />
               </div>
             </div>
 
             <div className="auth-sheet">
-              <p className="sheet-label">Join thousands of happy pet parents</p>
-
               {/* Google */}
               <button className="social-btn" onClick={() => go("petType")}>
                 <svg width="20" height="20" viewBox="0 0 24 24">
@@ -181,9 +194,15 @@ export default function OnboardingFlow() {
 
               {/* Phone */}
               <button className="phone-auth-btn" onClick={() => go("phone")}>
-                <span style={{ fontSize: "18px" }}>📱</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="3" stroke="white" strokeWidth="2"/><circle cx="12" cy="18" r="1" fill="white"/></svg>
                 Continue with Phone
               </button>
+
+              {/* Privacy note */}
+              <div style={{ background: "#F4F2EF", borderRadius: "12px", padding: "10px 14px", display: "flex", alignItems: "center", gap: "8px" }}>
+                <span style={{ fontSize: "16px" }}>🔒</span>
+                <p style={{ fontSize: "11px", color: "#6B7B8D", fontWeight: 600, margin: 0, lineHeight: 1.4 }}>We respect your privacy. Your data is safe with us.</p>
+              </div>
 
               <p className="terms-text">
                 By continuing you agree to our{" "}
@@ -787,7 +806,7 @@ export default function OnboardingFlow() {
         /* ── Auth step ── */
         .auth-hero {
           position: relative;
-          height: 380px;
+          height: 440px;
           overflow: hidden;
           flex-shrink: 0;
         }
@@ -796,10 +815,10 @@ export default function OnboardingFlow() {
           inset: 0;
           background: linear-gradient(
             to bottom,
-            rgba(0,0,0,0.15) 0%,
-            rgba(0,0,0,0.05) 45%,
-            rgba(255,255,255,0) 70%,
-            rgba(255,255,255,0) 100%
+            rgba(0,0,0,0.1) 0%,
+            rgba(0,0,0,0.05) 30%,
+            rgba(0,0,0,0.35) 65%,
+            rgba(0,0,0,0.55) 100%
           );
           z-index: 2;
         }
@@ -807,6 +826,9 @@ export default function OnboardingFlow() {
           position: absolute;
           bottom: 56px;
           left: 0; right: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
           text-align: center;
           z-index: 3;
           padding: 0 28px;
@@ -827,10 +849,11 @@ export default function OnboardingFlow() {
         }
         .auth-headline {
           font-family: 'Playfair Display', serif;
-          font-size: 30px;
+          font-size: 34px;
           font-weight: 700;
-          color: #1A2535;
+          color: #ffffff;
           line-height: 1.2;
+          text-shadow: 0 2px 12px rgba(0,0,0,0.6), 0 1px 4px rgba(0,0,0,0.5);
         }
         .auth-sheet {
           flex: 1;
