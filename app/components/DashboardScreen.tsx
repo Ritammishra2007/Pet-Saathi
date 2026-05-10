@@ -108,7 +108,7 @@ export default function DashboardScreen() {
           <div style={{ display: "flex", flexDirection: "column", gap: "10px", padding: "6px 16px 20px" }}>
 
             {/* ── PET PROFILE CARD ── */}
-            <Card>
+            <Card style={{ background: "linear-gradient(135deg, #FFF8F0 0%, #FFE8CC 100%)" }}>
               <div style={{ display: "flex", gap: "14px", alignItems: "flex-start" }}>
 
                 {/* Left */}
@@ -207,7 +207,7 @@ export default function DashboardScreen() {
 
             {/* ── NEXT VACCINE ── */}
             <Link href="/vaccines" style={{ textDecoration: "none" }}>
-              <Card>
+              <Card style={{ background: "linear-gradient(135deg, #FFF8F0 0%, #FFE8CC 100%)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
                   <div style={{
                     width: "52px", height: "52px", borderRadius: "14px",
@@ -241,7 +241,7 @@ export default function DashboardScreen() {
 
             {/* ── 30-DAY CHECKLIST ── */}
             {wantsChecklist && <Link href="/checklist" style={{ textDecoration: "none" }}>
-              <Card>
+              <Card style={{ background: "linear-gradient(135deg, #F0FBF4 0%, #E6F9EE 100%)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
                   <div style={{
                     width: "52px", height: "52px", borderRadius: "14px",
@@ -288,8 +288,8 @@ export default function DashboardScreen() {
                 {/* Nutrition */}
                 <Link href="/nutrition" style={{ textDecoration: "none", display: "flex" }}>
                   <div style={{
-                    background: C.surface, borderRadius: "18px", padding: "16px",
-                    boxShadow: "0 2px 12px rgba(18,16,58,0.06)", border: `1px solid ${C.grayLight}`,
+                    background: "linear-gradient(135deg, #FFF8F0 0%, #FFF0E0 100%)", borderRadius: "18px", padding: "16px",
+                    boxShadow: "0 2px 12px rgba(18,16,58,0.06)", border: "1.5px solid #000000",
                     flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between",
                   }}>
                     <div style={{
@@ -318,8 +318,8 @@ export default function DashboardScreen() {
                 {/* Vaccination */}
                 <Link href="/vaccines" style={{ textDecoration: "none", display: "flex" }}>
                   <div style={{
-                    background: C.surface, borderRadius: "18px", padding: "16px",
-                    boxShadow: "0 2px 12px rgba(18,16,58,0.06)", border: `1px solid ${C.grayLight}`,
+                    background: "linear-gradient(135deg, #F5F0FF 0%, #EDE8FF 100%)", borderRadius: "18px", padding: "16px",
+                    boxShadow: "0 2px 12px rgba(18,16,58,0.06)", border: "1.5px solid #000000",
                     flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between",
                   }}>
                     <div style={{
@@ -467,14 +467,15 @@ export default function DashboardScreen() {
   );
 }
 
-function Card({ children }: { children: React.ReactNode }) {
+function Card({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (
     <div style={{
       background: "#FFFFFF",
       borderRadius: "18px",
       padding: "16px",
       boxShadow: "0 2px 12px rgba(18,16,58,0.06)",
-      border: "1px solid #EEECF5",
+      border: "1.5px solid #000000",
+      ...style,
     }}>
       {children}
     </div>

@@ -22,9 +22,9 @@ interface PetData {
 
 /* ─── Pet types ─── */
 const PET_TYPES = [
-  { label: "Dog",   emoji: "🐶", image: "/golden.webp" },
-  { label: "Cat",   emoji: "🐱", image: "/kitten.webp" },
-  { label: "Other", emoji: "🐾", image: "/hamster.webp" },
+  { label: "Dog",   emoji: "🐶", image: "/puppy2.webp" },
+  { label: "Cat",   emoji: "🐱", image: "/cat_picture.jpg" },
+  { label: "Other", emoji: "🐾", image: "/rabbit.webp" },
 ];
 
 const OTHER_PETS = [
@@ -142,7 +142,6 @@ export default function OnboardingFlow() {
                 style={{ width: `${(progress / TOTAL_STEPS) * 100}%` }}
               />
             </div>
-            <span className="progress-label">{progress}/{TOTAL_STEPS}</span>
           </div>
         )}
 
@@ -343,7 +342,7 @@ export default function OnboardingFlow() {
                   onClick={() => { setPet({ ...pet, type: "Other", typeEmoji: "🐾" }); setOtherSearch(""); }}
                 >
                   <div className="pet-bar-photo">
-                    <Image src="/hamster.webp" alt="Other" fill style={{ objectFit: "cover" }} />
+                    <Image src="/rabbit.webp" alt="Other" fill style={{ objectFit: "cover" }} />
                   </div>
                   <span className="pet-bar-label">
                     {pet.type !== "Dog" && pet.type !== "Cat" && pet.type !== "" && pet.type !== "Other"
@@ -421,12 +420,6 @@ export default function OnboardingFlow() {
                 alt={pet.type} fill
                 style={{ objectFit: "cover", objectPosition: "center 20%" }} />
               <div className="details-hero-fade" />
-              <div className="details-hero-badge">
-                <span style={{ fontSize: "22px" }}>{pet.typeEmoji}</span>
-                <span style={{ fontSize: "13px", fontWeight: 800, color: "white" }}>
-                  Your {pet.type}
-                </span>
-              </div>
             </div>
 
             {/* Card sheet over image */}
@@ -452,7 +445,7 @@ export default function OnboardingFlow() {
 
               {/* Breed */}
               <div className="details-field">
-                <label className="details-label">Breed <span style={{ color: "#A8A29E", fontWeight: 500 }}>(optional)</span></label>
+                <label className="details-label">Breed <span style={{ color: "#FF8A1F", fontWeight: 700 }}>*</span></label>
                 <input
                   className="details-input"
                   type="text"
@@ -494,9 +487,9 @@ export default function OnboardingFlow() {
               <div style={{ flex: 1 }} />
 
               <button
-                className={`primary-btn ${pet.name && pet.ageValue ? "active" : "disabled"}`}
+                className={`primary-btn ${pet.name && pet.breed && pet.ageValue ? "active" : "disabled"}`}
                 onClick={() => go("newPetQ")}
-                disabled={!pet.name || !pet.ageValue}
+                disabled={!pet.name || !pet.breed || !pet.ageValue}
                 style={{ marginTop: "24px" }}
               >
                 Continue →
@@ -507,52 +500,87 @@ export default function OnboardingFlow() {
 
         {/* ════ STEP: NEW PET QUESTION ════ */}
         {step === "newPetQ" && (
-          <div className="step-content pad-step">
-            <div className="step-icon-wrap" style={{ background: "linear-gradient(135deg,#EDFAF2,#D4F5E2)" }}>
-              <span style={{ fontSize: "38px" }}>🏡</span>
-            </div>
-            <h2 className="step-title">
-              Is {pet.name || "your pet"} newly<br />adopted or recently born?
-            </h2>
-            <p className="step-subtitle">
-              This helps us understand how much support you&apos;ll need right now.
-            </p>
+          <div className="step-content" style={{ display: "flex", flexDirection: "column", background: "#FAFAF7" }}>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginTop: "8px" }}>
-              {/* Yes */}
+            {/* Illustration */}
+            <div style={{ display: "flex", justifyContent: "center", padding: "20px 40px" }}>
+              <Image src="/pets.png" alt="Pets" width={390} height={260} style={{ width: "100%", height: "auto", objectFit: "contain", filter: "drop-shadow(0 0 18px rgba(255,138,31,0.4)) drop-shadow(0 0 36px rgba(22,163,74,0.25))" }} />
+            </div>
+
+            {/* Question */}
+            <div style={{ padding: "18px 24px 0" }}>
+              <h2 style={{ fontSize: "26px", fontWeight: 900, color: "#12103A", lineHeight: 1.35, margin: "0 0 10px", fontFamily: "'Nunito', sans-serif" }}>
+                Is <span style={{ color: "#FF8A1F", background: "#FFF4EC", borderRadius: "8px", padding: "0 6px" }}>{pet.name || "your pet"}</span> a{" "}
+                <span style={{ background: "linear-gradient(135deg,#FF8A1F,#FFB347)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>newborn</span> pet? 🐾
+              </h2>
+              <p style={{ fontSize: "13px", color: "#8A8A9A", lineHeight: 1.7, margin: "0 0 18px", borderLeft: "3px solid #FF8A1F", paddingLeft: "10px" }}>
+                We&apos;ll personalize baby-pet care tips, feeding schedules, vaccines and the 30-day checklist. 🧡
+              </p>
+            </div>
+
+            {/* Cards */}
+            <div style={{ padding: "0 20px", display: "flex", flexDirection: "column", gap: "12px" }}>
+              {/* Yes — newborn */}
               <button
-                className={`choice-card ${pet.isNewPet === true ? "choice-selected" : ""}`}
-                onClick={() => {
-                  setPet({ ...pet, isNewPet: true });
-                  setTimeout(() => go("checklistQ"), 220);
-                }}
-              >
-                <div className="choice-icon-wrap" style={{ background: "linear-gradient(135deg,#EDFAF2,#D4F5E2)" }}>
-                  <span style={{ fontSize: "28px" }}>🌱</span>
+                onClick={() => { setPet({ ...pet, isNewPet: true }); }}
+                style={{
+                  display: "flex", alignItems: "center", gap: "14px",
+                  background: pet.isNewPet === true ? "linear-gradient(135deg, #F0FBF4, #E6F9EE)" : "white",
+                  border: `2px solid ${pet.isNewPet === true ? "#16A34A" : "#EBEBF0"}`,
+                  borderRadius: "20px", padding: "18px 16px", cursor: "pointer", textAlign: "left", width: "100%",
+                  boxShadow: pet.isNewPet === true ? "0 4px 16px rgba(22,163,74,0.15)" : "0 2px 8px rgba(0,0,0,0.04)",
+                  transition: "all 0.2s ease",
+                }}>
+                <div style={{ width: "56px", height: "56px", borderRadius: "16px", background: "#D4F0E0", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "28px", flexShrink: 0 }}>🌱</div>
+                <div style={{ flex: 1 }}>
+                  <p style={{ fontSize: "15px", fontWeight: 800, color: pet.isNewPet === true ? "#16A34A" : "#12103A", margin: "0 0 3px", fontFamily: "'Nunito', sans-serif" }}>
+                    Yes, {pet.name || "my pet"} is a newborn
+                  </p>
+                  <p style={{ fontSize: "12px", color: "#9A9AAA", margin: 0 }}>Just born or very young 🌱</p>
                 </div>
-                <div className="choice-text">
-                  <p className="choice-title">Yes, they&apos;re new!</p>
-                  <p className="choice-desc">Newly adopted, just born, or arrived recently</p>
+                <div style={{ width: "24px", height: "24px", borderRadius: "50%", background: pet.isNewPet === true ? "#16A34A" : "transparent", border: `2px solid ${pet.isNewPet === true ? "#16A34A" : "#D0D0DC"}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  {pet.isNewPet === true && <span style={{ color: "white", fontSize: "13px", fontWeight: 800 }}>✓</span>}
                 </div>
-                <div className={`choice-radio ${pet.isNewPet === true ? "radio-active" : ""}`} />
               </button>
 
-              {/* No */}
+              {/* No — settled */}
               <button
-                className={`choice-card ${pet.isNewPet === false ? "choice-selected" : ""}`}
-                onClick={() => {
-                  setPet({ ...pet, isNewPet: false, wantsChecklist: false });
-                  setTimeout(() => go("welcome"), 220);
-                }}
+                onClick={() => { setPet({ ...pet, isNewPet: false, wantsChecklist: false }); }}
+                style={{
+                  display: "flex", alignItems: "center", gap: "14px",
+                  background: pet.isNewPet === false ? "linear-gradient(135deg, #F5F0FF, #EDE8FF)" : "white",
+                  border: `2px solid ${pet.isNewPet === false ? "#8B5CF6" : "#EBEBF0"}`,
+                  borderRadius: "20px", padding: "18px 16px", cursor: "pointer", textAlign: "left", width: "100%",
+                  boxShadow: pet.isNewPet === false ? "0 4px 16px rgba(139,92,246,0.15)" : "0 2px 8px rgba(0,0,0,0.04)",
+                  transition: "all 0.2s ease",
+                }}>
+                <div style={{ width: "56px", height: "56px", borderRadius: "16px", overflow: "hidden", flexShrink: 0, position: "relative" }}>
+                  <Image src="/golden.webp" alt="Dog" fill style={{ objectFit: "cover" }} />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <p style={{ fontSize: "15px", fontWeight: 800, color: "#12103A", margin: "0 0 3px", fontFamily: "'Nunito', sans-serif" }}>
+                    No, {pet.name || "my pet"} is not a newborn
+                  </p>
+                  <p style={{ fontSize: "12px", color: "#9A9AAA", margin: 0 }}>Already growing and settled 🏡</p>
+                </div>
+                <div style={{ width: "24px", height: "24px", borderRadius: "50%", background: pet.isNewPet === false ? "#8B5CF6" : "transparent", border: `2px solid ${pet.isNewPet === false ? "#8B5CF6" : "#D0D0DC"}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  {pet.isNewPet === false && <span style={{ color: "white", fontSize: "13px", fontWeight: 800 }}>✓</span>}
+                </div>
+              </button>
+            </div>
+
+            <div style={{ flex: 1 }} />
+
+            <div style={{ padding: "20px" }}>
+              <button
+                className={`primary-btn ${pet.isNewPet !== undefined ? "active" : "disabled"}`}
+                style={{ background: pet.isNewPet !== undefined ? "linear-gradient(135deg, #FF8A1F, #FFB347)" : undefined, position: "relative", overflow: "hidden" }}
+                onClick={() => pet.isNewPet === true ? go("checklistQ") : go("welcome")}
+                disabled={pet.isNewPet === undefined}
               >
-                <div className="choice-icon-wrap" style={{ background: "linear-gradient(135deg,#F3EEFF,#E8DDFF)" }}>
-                  <span style={{ fontSize: "28px" }}>🏠</span>
-                </div>
-                <div className="choice-text">
-                  <p className="choice-title">No, we&apos;ve been together a while</p>
-                  <p className="choice-desc">Already settled in and feeling at home</p>
-                </div>
-                <div className={`choice-radio ${pet.isNewPet === false ? "radio-active" : ""}`} />
+                <span style={{ position: "absolute", left: "16px", fontSize: "18px", opacity: 0.25 }}>🐾</span>
+                Continue →
+                <span style={{ position: "absolute", right: "16px", fontSize: "18px", opacity: 0.25 }}>🐾</span>
               </button>
             </div>
           </div>
@@ -744,7 +772,13 @@ export default function OnboardingFlow() {
         .details-hero-fade {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.35) 100%);
+          background: linear-gradient(
+            to bottom,
+            rgba(0,0,0,0) 0%,
+            rgba(0,0,0,0) 40%,
+            rgba(255,255,255,0.5) 75%,
+            #ffffff 100%
+          );
           z-index: 2;
         }
         .details-hero-badge {

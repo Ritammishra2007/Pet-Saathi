@@ -201,9 +201,10 @@ export default function MicrochipPage() {
                 MICROCHIP ID
               </label>
               <input
-                type="text"
+                type="tel"
+                inputMode="numeric"
                 value={chipId}
-                onChange={e => { setChipId(e.target.value); setError(""); }}
+                onChange={e => { setChipId(e.target.value.replace(/\D/g, "")); setError(""); }}
                 placeholder="e.g. 985141000012345"
                 maxLength={20}
                 style={{
