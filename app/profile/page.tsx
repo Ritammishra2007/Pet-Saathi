@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import BottomNav from "../components/BottomNav";
 import Image from "next/image";
 import Link from "next/link";
@@ -32,6 +33,7 @@ export default function ProfilePage() {
   const [userEmail, setUserEmail] = useState("");
   const [userCity, setUserCity] = useState("City");
 
+  const router = useRouter();
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState({ name: "", email: "", city: "" });
 
@@ -147,14 +149,17 @@ export default function ProfilePage() {
         padding: "16px 16px 16px", position: "relative",
       }}>
 
-        {/* Edit button — top right */}
-        <button onClick={openEdit} style={{
-          position: "absolute", top: "16px", right: "16px",
-          background: "rgba(255,255,255,0.8)", border: `1px solid ${C.grayLight}`,
-          borderRadius: "10px", padding: "6px 14px", cursor: "pointer",
-          fontSize: "12px", fontWeight: 700, color: C.navy, fontFamily: "inherit",
-        }}>Edit</button>
+        {/* Back button — inline, not absolute */}
+        <button onClick={() => router.back()} style={{
+          background: "none", border: "none", cursor: "pointer", display: "flex",
+          alignItems: "center", gap: "6px", color: C.gray, fontSize: "13px",
+          fontWeight: 700, fontFamily: "inherit", padding: 0, marginBottom: "12px",
+        }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke={C.navy} strokeWidth="2.2" strokeLinecap="round"/></svg>
+          Back
+        </button>
 
+        {/* Edit button — top right */}
         {/* Avatar + info row */}
         <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "16px" }}>
           <div style={{
@@ -177,6 +182,12 @@ export default function ProfilePage() {
               borderRadius: "20px", border: `1px solid ${C.grayLight}`,
             }}>📍 {userCity}</span>
           </div>
+
+          <button onClick={openEdit} style={{
+            background: "rgba(255,255,255,0.8)", border: `1px solid ${C.grayLight}`,
+            borderRadius: "10px", padding: "6px 14px", cursor: "pointer",
+            fontSize: "12px", fontWeight: 700, color: C.navy, fontFamily: "inherit", flexShrink: 0,
+          }}>Edit</button>
         </div>
 
         {/* Stats */}

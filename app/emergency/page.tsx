@@ -2,6 +2,7 @@
 
 import BottomNav from "../components/BottomNav";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const C = {
   bg: "transparent", surface: "rgba(255,255,255,0.75)", navy: "#12103A",
@@ -80,6 +81,7 @@ const TIPS = [
 ];
 
 export default function EmergencyPage() {
+  const router = useRouter();
   const [aiText, setAiText] = useState("");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
@@ -104,8 +106,18 @@ export default function EmergencyPage() {
         backdropFilter: "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
         borderBottom: "1px solid rgba(220,38,38,0.15)",
-        padding: "24px 20px 16px",
+        padding: "16px 20px 16px",
       }}>
+        <button onClick={() => router.back()} style={{
+          background: "none", border: "none", cursor: "pointer", display: "flex",
+          alignItems: "center", gap: "6px", color: C.gray, fontSize: "13px",
+          fontWeight: 700, fontFamily: "inherit", padding: 0, marginBottom: "12px",
+        }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M15 18l-6-6 6-6" stroke={C.gray} strokeWidth="2.2" strokeLinecap="round"/>
+          </svg>
+          Back
+        </button>
         <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px" }}>
           <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: C.red, boxShadow: `0 0 6px ${C.red}` }} />
           <p style={{ fontSize: "12px", fontWeight: 700, color: C.red, margin: 0, letterSpacing: "0.4px" }}>EMERGENCY</p>

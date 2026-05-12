@@ -1,7 +1,8 @@
 "use client";
 
 import BottomNav from "../components/BottomNav";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const C = {
   bg: "transparent", surface: "rgba(255,255,255,0.75)", navy: "#12103A",
@@ -27,7 +28,14 @@ function formatDate(s: string) {
 }
 
 export default function VaccinesPage() {
+  const router = useRouter();
   const [tab, setTab] = useState<"all" | "upcoming" | "done">("all");
+  const [petName, setPetName] = useState("Bruno");
+
+  useEffect(() => {
+    const n = sessionStorage.getItem("petName");
+    if (n) setPetName(n);
+  }, []);
 
   const filtered = VACCINES.filter(v => {
     if (tab === "upcoming") return v.status === "upcoming" || v.status === "overdue";
@@ -44,9 +52,13 @@ export default function VaccinesPage() {
 
       {/* Header */}
       <div style={{ background: C.surface, padding: "20px 20px 0", borderBottom: `1px solid ${C.grayLight}` }}>
+        <button onClick={() => router.back()} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", color: C.navy, fontSize: "13px", fontWeight: 700, fontFamily: "inherit", padding: 0, marginBottom: "14px" }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke={C.navy} strokeWidth="2.2" strokeLinecap="round"/></svg>
+          Back
+        </button>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
           <div>
-            <p style={{ fontSize: "12px", color: C.gray, fontWeight: 600, marginBottom: "2px" }}>Bruno's Health Record</p>
+            <p style={{ fontSize: "12px", color: C.gray, fontWeight: 600, marginBottom: "2px" }}>{petName}'s Health Record</p>
             <h1 style={{ fontSize: "22px", fontWeight: 800, color: C.navy, margin: 0 }}>Vaccinations</h1>
           </div>
           <button style={{

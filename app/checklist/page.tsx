@@ -2,6 +2,7 @@
 
 import BottomNav from "../components/BottomNav";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const C = {
   bg: "#F4F2EF", surface: "#FFFFFF", navy: "#12103A", gray: "#8A8A9A",
@@ -31,6 +32,7 @@ const INITIAL_TASKS: Task[] = [
 const CATEGORIES = ["All", "Health", "Nutrition", "Training", "Grooming", "Safety", "Comfort"];
 
 export default function ChecklistPage() {
+  const router = useRouter();
   const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS);
   const [filter, setFilter] = useState("All");
 
@@ -50,7 +52,11 @@ export default function ChecklistPage() {
 
       {/* Header */}
       <div style={{ background: C.surface, borderBottom: `1px solid ${C.grayLight}` }}>
-        <div style={{ padding: "20px 20px 14px" }}>
+        <div style={{ padding: "16px 20px 14px" }}>
+          <button onClick={() => router.back()} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", color: C.navy, fontSize: "13px", fontWeight: 700, fontFamily: "inherit", padding: 0, marginBottom: "12px" }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke={C.navy} strokeWidth="2.2" strokeLinecap="round"/></svg>
+            Back
+          </button>
           <p style={{ fontSize: "12px", color: C.gray, fontWeight: 600, marginBottom: "2px" }}>Bruno · New Pet Plan</p>
           <h1 style={{ fontSize: "22px", fontWeight: 800, color: C.navy, margin: 0 }}>30-Day Checklist</h1>
         </div>

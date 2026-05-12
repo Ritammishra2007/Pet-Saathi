@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import BottomNav from "../components/BottomNav";
+import { useRouter } from "next/navigation";
 
 const C = {
   bg: "#F4F2EF", surface: "#FFFFFF", navy: "#12103A", gray: "#8A8A9A",
@@ -36,6 +37,7 @@ function getResponse(text: string): string {
 }
 
 export default function AssistantPage() {
+  const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([
     { role: "ai", text: "Hi! I'm Bruno's AI Health Assistant. Ask me anything about his diet, symptoms, behaviour, or general care. 🐾" },
   ]);
@@ -65,9 +67,13 @@ export default function AssistantPage() {
       {/* Header */}
       <div style={{
         background: `linear-gradient(135deg, #0D9488, #0EA5E9)`,
-        padding: "24px 20px 20px",
+        padding: "16px 20px 20px",
         boxShadow: "0 4px 20px rgba(13,148,136,0.25)",
       }}>
+        <button onClick={() => router.back()} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", color: "rgba(255,255,255,0.8)", fontSize: "13px", fontWeight: 700, fontFamily: "inherit", padding: 0, marginBottom: "12px" }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="rgba(255,255,255,0.8)" strokeWidth="2.2" strokeLinecap="round"/></svg>
+          Back
+        </button>
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <div style={{
             width: "44px", height: "44px", borderRadius: "14px",
