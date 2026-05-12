@@ -60,12 +60,14 @@ export default function MicrochipPage() {
   const [saved, setSaved] = useState(false);
 
   function handleSave() {
-    if (chipId.trim().length < 9) {
-      setError("Please enter a valid microchip ID (min 9 characters)");
+    if (chipId.length !== 15) {
+      setError("Microchip ID must be exactly 15 digits");
       return;
     }
-    sessionStorage.setItem("chipId", chipId.trim());
+    sessionStorage.setItem("chipId", chipId);
     sessionStorage.setItem("chipVerified", "true");
+    localStorage.setItem("chipId", chipId);
+    localStorage.setItem("chipVerified", "true");
     setSaved(true);
     setTimeout(() => { preserveDashboardData(); router.push("/dashboard"); }, 1400);
   }
@@ -204,9 +206,9 @@ export default function MicrochipPage() {
                 type="tel"
                 inputMode="numeric"
                 value={chipId}
-                onChange={e => { setChipId(e.target.value.replace(/\D/g, "")); setError(""); }}
+                onChange={e => { setChipId(e.target.value.replace(/\D/g, "").slice(0, 15)); setError(""); }}
                 placeholder="e.g. 985141000012345"
-                maxLength={20}
+                maxLength={15}
                 style={{
                   width: "100%", padding: "14px 16px", borderRadius: "14px",
                   border: `1.5px solid ${error ? C.red : C.grayLight}`,
@@ -215,9 +217,15 @@ export default function MicrochipPage() {
                   letterSpacing: "1px",
                 }}
               />
-              {error && (
-                <p style={{ fontSize: "12px", color: C.red, fontWeight: 600, marginTop: "6px" }}>{error}</p>
-              )}
+              <div style={{ display: "flex", justifyContent: "space-between", marginTop: "6px" }}>
+                {error
+                  ? <p style={{ fontSize: "12px", color: C.red, fontWeight: 600, margin: 0 }}>{error}</p>
+                  : <span />
+                }
+                <p style={{ fontSize: "12px", fontWeight: 600, color: chipId.length === 15 ? C.green : C.gray, margin: 0 }}>
+                  {chipId.length}/15
+                </p>
+              </div>
             </div>
 
             <div style={{
