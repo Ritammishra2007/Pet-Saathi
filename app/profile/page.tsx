@@ -32,7 +32,7 @@ const SETTINGS = [
 
 export default function ProfilePage() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "'Nunito', sans-serif" }}>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
 
       <div style={{ background: C.surface, borderBottom: `1px solid ${C.grayLight}`, padding: "24px 20px 20px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
@@ -65,7 +65,7 @@ export default function ProfilePage() {
           <button style={{
             background: C.bg, border: `1px solid ${C.grayLight}`,
             borderRadius: "10px", padding: "8px 14px", cursor: "pointer",
-            fontSize: "12px", fontWeight: 700, color: C.navy, fontFamily: "'Nunito', sans-serif",
+            fontSize: "12px", fontWeight: 700, color: C.navy, fontFamily: "inherit",
           }}>Edit</button>
         </div>
 
@@ -210,7 +210,7 @@ export default function ProfilePage() {
           width: "100%", padding: "14px", borderRadius: "14px",
           background: "#FEF2F2", border: "1px solid #FECACA",
           color: C.red, fontSize: "14px", fontWeight: 700,
-          cursor: "pointer", fontFamily: "'Nunito', sans-serif",
+          cursor: "pointer", fontFamily: "inherit",
         }}>Sign Out</button>
       </div>
 

@@ -60,7 +60,7 @@ export default function AssistantPage() {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "'Nunito', sans-serif" }}>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
 
       {/* Header */}
       <div style={{
@@ -105,7 +105,7 @@ export default function AssistantPage() {
                   borderRadius: "12px", padding: "10px 14px",
                   textAlign: "left", cursor: "pointer",
                   fontSize: "12px", fontWeight: 600, color: C.navy,
-                  fontFamily: "'Nunito', sans-serif",
+                  fontFamily: "inherit",
                   boxShadow: "0 2px 8px rgba(18,16,58,0.04)",
                 }}>
                   💬 {s}
@@ -189,7 +189,7 @@ export default function AssistantPage() {
             placeholder="Ask about Bruno's health..."
             style={{
               flex: 1, background: "none", border: "none", outline: "none",
-              fontSize: "13px", fontFamily: "'Nunito', sans-serif", color: C.navy,
+              fontSize: "13px", fontFamily: "inherit", color: C.navy,
             }}
           />
           <button

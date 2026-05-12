@@ -36,17 +36,17 @@ export default function NotificationsPage() {
   const [prefs, setPrefs] = useState<Record<string, boolean>>({ vaccine: true, vet: true, checklist: true, community: false, tips: true });
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "'Nunito', sans-serif" }}>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
 
       <div style={{ background: C.surface, padding: "20px 20px 0", borderBottom: `1px solid ${C.grayLight}` }}>
-        <button onClick={() => router.back()} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", color: C.gray, fontSize: "13px", fontWeight: 700, fontFamily: "'Nunito', sans-serif", padding: 0, marginBottom: "14px" }}>
+        <button onClick={() => router.back()} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", color: C.gray, fontSize: "13px", fontWeight: 700, fontFamily: "inherit", padding: 0, marginBottom: "14px" }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke={C.gray} strokeWidth="2.2" strokeLinecap="round"/></svg>
           Back
         </button>
         <h1 style={{ fontSize: "22px", fontWeight: 800, color: C.navy, margin: "0 0 16px" }}>Notifications</h1>
         <div style={{ display: "flex", borderBottom: `1px solid ${C.grayLight}`, marginLeft: "-20px", paddingLeft: "20px" }}>
           {(["all", "settings"] as const).map(t => (
-            <button key={t} onClick={() => setTab(t)} style={{ background: "none", border: "none", cursor: "pointer", padding: "8px 16px 10px", fontSize: "13px", fontWeight: tab === t ? 800 : 600, color: tab === t ? C.navy : C.gray, borderBottom: tab === t ? `2px solid ${C.navy}` : "2px solid transparent", marginBottom: "-1px", fontFamily: "'Nunito', sans-serif" }}>
+            <button key={t} onClick={() => setTab(t)} style={{ background: "none", border: "none", cursor: "pointer", padding: "8px 16px 10px", fontSize: "13px", fontWeight: tab === t ? 800 : 600, color: tab === t ? C.navy : C.gray, borderBottom: tab === t ? `2px solid ${C.navy}` : "2px solid transparent", marginBottom: "-1px", fontFamily: "inherit" }}>
               {t === "all" ? "All" : "Settings"}
             </button>
           ))}

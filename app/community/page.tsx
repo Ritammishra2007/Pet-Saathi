@@ -80,7 +80,7 @@ export default function CommunityPage() {
   const filtered = active === "All" ? posts : posts.filter(p => p.tag === active);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "'Nunito', sans-serif" }}>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
 
       {/* Header */}
       <div style={{ background: C.surface, padding: "20px 20px 0", borderBottom: `1px solid ${C.grayLight}` }}>
@@ -92,7 +92,7 @@ export default function CommunityPage() {
           <button onClick={() => setShowModal(true)} style={{
             background: C.orange, color: "white", border: "none", borderRadius: "12px",
             padding: "10px 14px", fontSize: "13px", fontWeight: 700, cursor: "pointer",
-            fontFamily: "'Nunito', sans-serif",
+            fontFamily: "inherit",
           }}>+ Post</button>
         </div>
 
@@ -113,7 +113,7 @@ export default function CommunityPage() {
               background: active === cat ? C.orange : C.bg,
               color: active === cat ? "white" : C.gray,
               border: "none", cursor: "pointer", fontSize: "12px", fontWeight: 700,
-              fontFamily: "'Nunito', sans-serif",
+              fontFamily: "inherit",
             }}>{cat}</button>
           ))}
         </div>
@@ -156,19 +156,19 @@ export default function CommunityPage() {
             <p style={{ fontSize: "14px", fontWeight: 800, color: C.navy, margin: 0, marginBottom: "6px", lineHeight: 1.3 }}>{post.title}</p>
             <p style={{ fontSize: "12px", color: C.gray, margin: 0, lineHeight: 1.5 }}>{post.body}</p>
             <div style={{ display: "flex", gap: "18px", marginTop: "12px", paddingTop: "10px", borderTop: `1px solid ${C.grayLight}` }}>
-              <button onClick={() => toggleLike(post.id)} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "5px", fontSize: "12px", fontWeight: 700, color: post.liked ? C.orange : C.gray, fontFamily: "'Nunito', sans-serif" }}>
+              <button onClick={() => toggleLike(post.id)} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "5px", fontSize: "12px", fontWeight: 700, color: post.liked ? C.orange : C.gray, fontFamily: "inherit" }}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill={post.liked ? C.orange : "none"}>
                   <path d="M8 13.5C8 13.5 1.5 9.5 1.5 5.5C1.5 3.567 3.067 2 5 2C6.15 2 7.15 2.55 7.75 3.4L8 3.75L8.25 3.4C8.85 2.55 9.85 2 11 2C12.933 2 14.5 3.567 14.5 5.5C14.5 9.5 8 13.5 8 13.5Z" stroke={post.liked ? C.orange : C.gray} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
                 {post.likes}
               </button>
-              <button style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "5px", fontSize: "12px", fontWeight: 700, color: C.gray, fontFamily: "'Nunito', sans-serif" }}>
+              <button style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "5px", fontSize: "12px", fontWeight: 700, color: C.gray, fontFamily: "inherit" }}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M14 8c0 3.314-2.686 6-6 6a5.97 5.97 0 01-3.5-1.126L2 13.5l.626-2.5A5.97 5.97 0 012 8c0-3.314 2.686-6 6-6s6 2.686 6 6z" stroke={C.gray} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
                 {post.replies} replies
               </button>
-              <button style={{ background: "none", border: "none", cursor: "pointer", marginLeft: "auto", display: "flex", alignItems: "center", gap: "5px", fontSize: "12px", fontWeight: 700, color: C.gray, fontFamily: "'Nunito', sans-serif" }}>
+              <button style={{ background: "none", border: "none", cursor: "pointer", marginLeft: "auto", display: "flex", alignItems: "center", gap: "5px", fontSize: "12px", fontWeight: 700, color: C.gray, fontFamily: "inherit" }}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M10 2l4 4-4 4M2 10V9a4 4 0 014-4h8" stroke={C.gray} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -219,7 +219,7 @@ export default function CommunityPage() {
                       background: petType === pt ? C.navy : C.bg,
                       color: petType === pt ? "white" : C.gray,
                       border: "none", fontSize: "12px", fontWeight: 700,
-                      fontFamily: "'Nunito', sans-serif",
+                      fontFamily: "inherit",
                     }}>{pt}</button>
                   ))}
                 </div>
@@ -235,7 +235,7 @@ export default function CommunityPage() {
                       background: tag.label === t.label ? t.color : t.bg,
                       color: tag.label === t.label ? "white" : t.color,
                       border: "none", fontSize: "12px", fontWeight: 700,
-                      fontFamily: "'Nunito', sans-serif",
+                      fontFamily: "inherit",
                     }}>{t.label}</button>
                   ))}
                 </div>
@@ -253,7 +253,7 @@ export default function CommunityPage() {
                     width: "100%", background: C.bg, border: `1.5px solid ${title ? C.orange : C.grayLight}`,
                     borderRadius: "14px", padding: "12px 14px",
                     fontSize: "14px", fontWeight: 600, color: C.navy,
-                    fontFamily: "'Nunito', sans-serif", outline: "none",
+                    fontFamily: "inherit", outline: "none",
                     boxSizing: "border-box", transition: "border-color 0.2s",
                   }}
                 />
@@ -273,7 +273,7 @@ export default function CommunityPage() {
                     width: "100%", background: C.bg, border: `1.5px solid ${body ? C.orange : C.grayLight}`,
                     borderRadius: "14px", padding: "12px 14px",
                     fontSize: "13px", fontWeight: 500, color: C.navy,
-                    fontFamily: "'Nunito', sans-serif", outline: "none",
+                    fontFamily: "inherit", outline: "none",
                     resize: "none", boxSizing: "border-box", lineHeight: 1.5,
                     transition: "border-color 0.2s",
                   }}
@@ -293,7 +293,7 @@ export default function CommunityPage() {
                   color: title.trim() && body.trim() ? "white" : C.gray,
                   border: "none", borderRadius: "16px",
                   fontSize: "15px", fontWeight: 800, cursor: title.trim() && body.trim() ? "pointer" : "default",
-                  fontFamily: "'Nunito', sans-serif",
+                  fontFamily: "inherit",
                   boxShadow: title.trim() && body.trim() ? `0 8px 24px ${C.orange}40` : "none",
                   transition: "all 0.2s",
                 }}

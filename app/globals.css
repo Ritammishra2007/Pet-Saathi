@@ -1,4 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800;900&family=Fredoka+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800;900&family=Fredoka+One&display=swap');
+
+@font-face {
+  font-family: 'Grodna';
+  src: url('/Grodna-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 @import "tailwindcss";
 
 :root {
@@ -27,8 +35,8 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Nunito', sans-serif;
-  background: #1a1a2e;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Segoe UI", sans-serif;
+  background: #0f0f1a;
   color: var(--text-dark);
   min-height: 100vh;
   overflow-x: hidden;
@@ -57,7 +65,7 @@ body {
   border-radius: 50px;
   color: #fff;
   font-weight: 700;
-  font-family: 'Nunito', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Segoe UI", sans-serif;
   letter-spacing: 0.3px;
   box-shadow:
     0 6px 20px rgba(255,138,31,0.45),

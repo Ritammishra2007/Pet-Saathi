@@ -71,7 +71,7 @@ export default function MicrochipPage() {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "'Nunito', sans-serif" }}>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
 
       {/* Header */}
       <div style={{ background: C.surface, padding: "20px 20px 20px", borderBottom: `1px solid ${C.grayLight}` }}>
@@ -80,7 +80,7 @@ export default function MicrochipPage() {
           style={{
             background: "none", border: "none", cursor: "pointer", display: "flex",
             alignItems: "center", gap: "6px", color: C.gray, fontSize: "13px", fontWeight: 700,
-            fontFamily: "'Nunito', sans-serif", padding: 0, marginBottom: "14px",
+            fontFamily: "inherit", padding: 0, marginBottom: "14px",
           }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
             <path d="M15 18l-6-6 6-6" stroke={C.gray} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -120,7 +120,7 @@ export default function MicrochipPage() {
                   background: C.surface, border: `1.5px solid ${C.grayLight}`,
                   borderRadius: "18px", padding: "20px 18px", cursor: "pointer",
                   display: "flex", alignItems: "center", gap: "16px", textAlign: "left",
-                  fontFamily: "'Nunito', sans-serif", width: "100%",
+                  fontFamily: "inherit", width: "100%",
                 }}>
                 <div style={{
                   width: "52px", height: "52px", borderRadius: "14px", background: C.greenBg,
@@ -149,7 +149,7 @@ export default function MicrochipPage() {
                   background: C.surface, border: `1.5px solid ${C.grayLight}`,
                   borderRadius: "18px", padding: "20px 18px", cursor: "pointer",
                   display: "flex", alignItems: "center", gap: "16px", textAlign: "left",
-                  fontFamily: "'Nunito', sans-serif", width: "100%",
+                  fontFamily: "inherit", width: "100%",
                 }}>
                 <div style={{
                   width: "52px", height: "52px", borderRadius: "14px", background: C.amberBg,
@@ -211,7 +211,7 @@ export default function MicrochipPage() {
                   width: "100%", padding: "14px 16px", borderRadius: "14px",
                   border: `1.5px solid ${error ? C.red : C.grayLight}`,
                   fontSize: "16px", fontWeight: 700, color: C.navy, background: C.surface,
-                  fontFamily: "'Nunito', sans-serif", outline: "none", boxSizing: "border-box",
+                  fontFamily: "inherit", outline: "none", boxSizing: "border-box",
                   letterSpacing: "1px",
                 }}
               />
@@ -240,7 +240,7 @@ export default function MicrochipPage() {
                 width: "100%", padding: "15px", borderRadius: "14px",
                 background: C.navy, border: "none", color: "white",
                 fontSize: "15px", fontWeight: 800, cursor: "pointer",
-                fontFamily: "'Nunito', sans-serif",
+                fontFamily: "inherit",
               }}>
               Save & Verify →
             </button>
@@ -323,7 +323,7 @@ export default function MicrochipPage() {
                         background: C.greenBg, border: `1px solid #BBF7D0`,
                         color: C.green, fontSize: "13px", fontWeight: 800,
                         textDecoration: "none", textAlign: "center",
-                        fontFamily: "'Nunito', sans-serif",
+                        fontFamily: "inherit",
                         display: "flex", alignItems: "center", justifyContent: "center", gap: "6px",
                       }}>
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -336,7 +336,7 @@ export default function MicrochipPage() {
                         flex: 2, padding: "11px", borderRadius: "12px",
                         background: C.navy, border: "none",
                         color: "white", fontSize: "13px", fontWeight: 800,
-                        cursor: "pointer", fontFamily: "'Nunito', sans-serif",
+                        cursor: "pointer", fontFamily: "inherit",
                       }}>
                       Book Appointment →
                     </button>

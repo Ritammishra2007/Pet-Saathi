@@ -33,10 +33,10 @@ export default function NearbyVetsPage() {
   );
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "'Nunito', sans-serif" }}>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
 
       <div style={{ background: C.surface, padding: "20px 20px 16px", borderBottom: `1px solid ${C.grayLight}` }}>
-        <button onClick={() => router.back()} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", color: C.gray, fontSize: "13px", fontWeight: 700, fontFamily: "'Nunito', sans-serif", padding: 0, marginBottom: "14px" }}>
+        <button onClick={() => router.back()} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", color: C.gray, fontSize: "13px", fontWeight: 700, fontFamily: "inherit", padding: 0, marginBottom: "14px" }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke={C.gray} strokeWidth="2.2" strokeLinecap="round"/></svg>
           Back
         </button>
@@ -45,13 +45,13 @@ export default function NearbyVetsPage() {
         {/* Search */}
         <div style={{ display: "flex", alignItems: "center", gap: "10px", background: C.bg, borderRadius: "14px", padding: "10px 14px", marginBottom: "12px" }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke={C.gray} strokeWidth="2"/><path d="M16.5 16.5l3.5 3.5" stroke={C.gray} strokeWidth="2" strokeLinecap="round"/></svg>
-          <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search clinics or area..." style={{ flex: 1, border: "none", background: "transparent", fontSize: "14px", fontWeight: 600, color: C.navy, fontFamily: "'Nunito', sans-serif", outline: "none" }} />
+          <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search clinics or area..." style={{ flex: 1, border: "none", background: "transparent", fontSize: "14px", fontWeight: 600, color: C.navy, fontFamily: "inherit", outline: "none" }} />
         </div>
 
         {/* Filters */}
         <div style={{ display: "flex", gap: "8px", overflowX: "auto", paddingBottom: "4px" }}>
           {FILTERS.map(f => (
-            <button key={f} onClick={() => setActiveFilter(f)} style={{ background: activeFilter === f ? C.navy : C.bg, color: activeFilter === f ? "white" : C.gray, border: "none", borderRadius: "20px", padding: "6px 14px", fontSize: "12px", fontWeight: 700, cursor: "pointer", whiteSpace: "nowrap", fontFamily: "'Nunito', sans-serif" }}>{f}</button>
+            <button key={f} onClick={() => setActiveFilter(f)} style={{ background: activeFilter === f ? C.navy : C.bg, color: activeFilter === f ? "white" : C.gray, border: "none", borderRadius: "20px", padding: "6px 14px", fontSize: "12px", fontWeight: 700, cursor: "pointer", whiteSpace: "nowrap", fontFamily: "inherit" }}>{f}</button>
           ))}
         </div>
       </div>
@@ -78,10 +78,10 @@ export default function NearbyVetsPage() {
               <p style={{ fontSize: "12px", color: C.gray, fontWeight: 600, margin: 0 }}>{vet.timing}</p>
             </div>
             <div style={{ display: "flex", gap: "10px" }}>
-              <a href={`tel:${vet.phone}`} style={{ flex: 1, padding: "11px", borderRadius: "12px", background: C.greenBg, border: `1px solid #BBF7D0`, color: C.green, fontSize: "13px", fontWeight: 800, textDecoration: "none", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", fontFamily: "'Nunito', sans-serif" }}>
+              <a href={`tel:${vet.phone}`} style={{ flex: 1, padding: "11px", borderRadius: "12px", background: C.greenBg, border: `1px solid #BBF7D0`, color: C.green, fontSize: "13px", fontWeight: 800, textDecoration: "none", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", fontFamily: "inherit" }}>
                 📞 Call
               </a>
-              <button style={{ flex: 2, padding: "11px", borderRadius: "12px", background: C.navy, border: "none", color: "white", fontSize: "13px", fontWeight: 800, cursor: "pointer", fontFamily: "'Nunito', sans-serif" }}>
+              <button style={{ flex: 2, padding: "11px", borderRadius: "12px", background: C.navy, border: "none", color: "white", fontSize: "13px", fontWeight: 800, cursor: "pointer", fontFamily: "inherit" }}>
                 Book Appointment →
               </button>
             </div>

@@ -34,7 +34,7 @@ export default function EmergencyPage() {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "'Nunito', sans-serif" }}>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
 
       {/* Emergency header */}
       <div style={{
@@ -96,7 +96,7 @@ export default function EmergencyPage() {
             placeholder="e.g. Bruno is vomiting and seems lethargic since morning..."
             style={{
               width: "100%", background: C.bg, border: "none", borderRadius: "12px",
-              padding: "12px", fontSize: "13px", fontFamily: "'Nunito', sans-serif",
+              padding: "12px", fontSize: "13px", fontFamily: "inherit",
               color: C.navy, resize: "none", minHeight: "80px", outline: "none",
               boxSizing: "border-box",
             }}
@@ -119,7 +119,7 @@ export default function EmergencyPage() {
               background: `linear-gradient(135deg, #12103A, #3D3A6B)`,
               color: "white", border: "none", borderRadius: "12px",
               fontSize: "13px", fontWeight: 700, cursor: "pointer",
-              fontFamily: "'Nunito', sans-serif",
+              fontFamily: "inherit",
             }}
           >
             Get AI Guidance →

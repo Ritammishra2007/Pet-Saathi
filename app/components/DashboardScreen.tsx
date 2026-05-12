@@ -9,20 +9,20 @@ import { useState, useEffect } from "react";
 
 /* ── Color tokens ── */
 const C = {
-  bg:        "#F4F2EF",
-  surface:   "#FFFFFF",
-  navy:      "#12103A",
+  bg:        "transparent",
+  surface:   "rgba(255,255,255,0.55)",
+  navy:      "#151B54",
   navyLight: "#3D3A6B",
-  gray:      "#8A8A9A",
-  grayLight: "#E8E7F0",
-  orange:    "#F97316",
-  orangeBg:  "#FFF4EC",
-  green:     "#16A34A",
-  greenBg:   "#F0FBF4",
-  red:       "#DC2626",
-  redBg:     "#FEF2F2",
+  gray:      "#7A7A8A",
+  grayLight: "rgba(232,231,240,0.6)",
+  orange:    "#FF9F2D",
+  orangeBg:  "rgba(255,159,45,0.12)",
+  green:     "#34C759",
+  greenBg:   "rgba(52,199,89,0.12)",
+  red:       "#FF3B30",
+  redBg:     "rgba(255,59,48,0.1)",
   purple:    "#6D28D9",
-  purpleBg:  "#F5F0FF",
+  purpleBg:  "rgba(109,40,217,0.1)",
 };
 
 // New random ID on every JS module load (i.e. every page reload).
@@ -72,13 +72,18 @@ export default function DashboardScreen() {
 
   return (
     <PhoneFrame>
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", background: C.bg, overflow: "hidden" }}>
-        <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden" }}>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", background: C.bg, overflow: "hidden", position: "relative" }}>
+        {/* Ambient background blobs */}
+        <div style={{ position: "absolute", top: "-60px", right: "-60px", width: "220px", height: "220px", borderRadius: "50%", background: "radial-gradient(circle, rgba(255,159,45,0.18) 0%, transparent 70%)", filter: "blur(30px)", pointerEvents: "none", zIndex: 0 }} />
+        <div style={{ position: "absolute", top: "40%", left: "-80px", width: "200px", height: "200px", borderRadius: "50%", background: "radial-gradient(circle, rgba(109,40,217,0.1) 0%, transparent 70%)", filter: "blur(30px)", pointerEvents: "none", zIndex: 0 }} />
+        <div style={{ position: "absolute", bottom: "10%", right: "-40px", width: "180px", height: "180px", borderRadius: "50%", background: "radial-gradient(circle, rgba(52,199,89,0.12) 0%, transparent 70%)", filter: "blur(25px)", pointerEvents: "none", zIndex: 0 }} />
+
+        <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden", position: "relative", zIndex: 1 }}>
 
           {/* ── HEADER ── */}
           <div style={{ padding: "18px 20px 10px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <div>
-              <h2 style={{ fontSize: "20px", fontWeight: 800, color: C.navy, fontFamily: "'Nunito',sans-serif" }}>
+              <h2 style={{ fontSize: "20px", fontWeight: 800, color: C.navy, fontFamily: "inherit" }}>
                 Hello, {petName}'s Parent 👋
               </h2>
             </div>
@@ -100,7 +105,7 @@ export default function DashboardScreen() {
                 background: C.red, border: "2px solid white",
                 fontSize: "8px", fontWeight: 900, color: "white",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                fontFamily: "'Nunito',sans-serif",
+                fontFamily: "inherit",
               }}>3</div>
             </div>
           </div>
@@ -108,7 +113,10 @@ export default function DashboardScreen() {
           <div style={{ display: "flex", flexDirection: "column", gap: "10px", padding: "6px 16px 20px" }}>
 
             {/* ── PET PROFILE CARD ── */}
-            <Card style={{ background: "linear-gradient(135deg, #FFF8F0 0%, #FFE8CC 100%)" }}>
+            <Card style={{
+              background: "linear-gradient(135deg, rgba(255,248,240,0.75) 0%, rgba(255,220,160,0.5) 100%)",
+              boxShadow: "0 16px 48px rgba(255,159,45,0.22), 0 4px 16px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.9)",
+            }}>
               <div style={{ display: "flex", gap: "14px", alignItems: "flex-start" }}>
 
                 {/* Left */}
@@ -207,7 +215,7 @@ export default function DashboardScreen() {
 
             {/* ── NEXT VACCINE ── */}
             <Link href="/vaccines" style={{ textDecoration: "none" }}>
-              <Card style={{ background: "linear-gradient(135deg, #FFF8F0 0%, #FFE8CC 100%)" }}>
+              <Card style={{ background: "linear-gradient(135deg, rgba(255,248,240,0.8) 0%, rgba(255,220,160,0.55) 100%)", boxShadow: "0 16px 48px rgba(255,159,45,0.2), 0 4px 16px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.9)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
                   <div style={{
                     width: "52px", height: "52px", borderRadius: "14px",
@@ -220,7 +228,7 @@ export default function DashboardScreen() {
                     <p style={{ fontSize: "10px", fontWeight: 800, color: C.orange, textTransform: "uppercase", letterSpacing: "0.8px", marginBottom: "3px" }}>
                       Next Vaccine
                     </p>
-                    <p style={{ fontSize: "17px", fontWeight: 800, color: C.navy, fontFamily: "'Nunito',sans-serif", marginBottom: "4px" }}>
+                    <p style={{ fontSize: "17px", fontWeight: 800, color: C.navy, fontFamily: "inherit", marginBottom: "4px" }}>
                       Rabies Vaccine
                     </p>
                     <p style={{ fontSize: "12px", color: C.gray, fontWeight: 600 }}>12 May 2025</p>
@@ -241,7 +249,7 @@ export default function DashboardScreen() {
 
             {/* ── 30-DAY CHECKLIST ── */}
             {wantsChecklist && <Link href="/checklist" style={{ textDecoration: "none" }}>
-              <Card style={{ background: "linear-gradient(135deg, #F0FBF4 0%, #E6F9EE 100%)" }}>
+              <Card style={{ background: "linear-gradient(135deg, rgba(240,251,244,0.8) 0%, rgba(200,245,220,0.6) 100%)", boxShadow: "0 16px 48px rgba(52,199,89,0.2), 0 4px 16px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.9)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
                   <div style={{
                     width: "52px", height: "52px", borderRadius: "14px",
@@ -254,7 +262,7 @@ export default function DashboardScreen() {
                     <p style={{ fontSize: "10px", fontWeight: 800, color: C.green, textTransform: "uppercase", letterSpacing: "0.8px", marginBottom: "3px" }}>
                       Checklist
                     </p>
-                    <p style={{ fontSize: "17px", fontWeight: 800, color: C.navy, fontFamily: "'Nunito',sans-serif", marginBottom: "7px" }}>
+                    <p style={{ fontSize: "17px", fontWeight: 800, color: C.navy, fontFamily: "inherit", marginBottom: "7px" }}>
                       30 Days Checklist
                     </p>
                     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -275,8 +283,8 @@ export default function DashboardScreen() {
             {/* ── TODAY ── */}
             <div>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "10px", padding: "0 2px" }}>
-                <p style={{ fontSize: "16px", fontWeight: 800, color: C.navy, fontFamily: "'Nunito',sans-serif" }}>Today</p>
-                <button style={{ background: "none", border: "none", fontSize: "12px", fontWeight: 700, color: C.purple, cursor: "pointer", fontFamily: "'Nunito',sans-serif", display: "flex", alignItems: "center", gap: "2px" }}>
+                <p style={{ fontSize: "16px", fontWeight: 800, color: C.navy, fontFamily: "inherit" }}>Today</p>
+                <button style={{ background: "none", border: "none", fontSize: "12px", fontWeight: 700, color: C.purple, cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", gap: "2px" }}>
                   View all
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                     <path d="M9 18l6-6-6-6" stroke={C.purple} strokeWidth="2.5" strokeLinecap="round"/>
@@ -288,15 +296,15 @@ export default function DashboardScreen() {
                 {/* Nutrition */}
                 <Link href="/nutrition" style={{ textDecoration: "none", display: "flex" }}>
                   <div style={{
-                    background: "linear-gradient(135deg, #FFF8F0 0%, #FFF0E0 100%)", borderRadius: "18px", padding: "16px",
-                    boxShadow: "0 2px 12px rgba(18,16,58,0.06)", border: "1.5px solid #000000",
+                    background: "rgba(255,248,240,0.7)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", borderRadius: "24px", padding: "16px",
+                    boxShadow: "0 12px 36px rgba(255,159,45,0.18), 0 4px 12px rgba(0,0,0,0.09), inset 0 1px 0 rgba(255,255,255,0.85)", border: "1.5px solid rgba(255,255,255,0.7)",
                     flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between",
                   }}>
                     <div style={{
                       width: "44px", height: "44px", borderRadius: "12px", background: C.orangeBg,
                       display: "flex", alignItems: "center", justifyContent: "center",
                     }}>
-                      <Image src="/food_guide.png" alt="Nutrition" width={38} height={38} style={{ objectFit: "contain" }} />
+                      <Image src="/food.png" alt="Nutrition" width={38} height={38} style={{ objectFit: "contain" }} />
                     </div>
                     <div>
                       <p style={{ fontSize: "13px", fontWeight: 800, color: C.navy, marginBottom: "3px" }}>Nutrition Guide</p>
@@ -318,8 +326,8 @@ export default function DashboardScreen() {
                 {/* Vaccination */}
                 <Link href="/vaccines" style={{ textDecoration: "none", display: "flex" }}>
                   <div style={{
-                    background: "linear-gradient(135deg, #F5F0FF 0%, #EDE8FF 100%)", borderRadius: "18px", padding: "16px",
-                    boxShadow: "0 2px 12px rgba(18,16,58,0.06)", border: "1.5px solid #000000",
+                    background: "rgba(245,240,255,0.7)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", borderRadius: "24px", padding: "16px",
+                    boxShadow: "0 12px 36px rgba(109,40,217,0.15), 0 4px 12px rgba(0,0,0,0.09), inset 0 1px 0 rgba(255,255,255,0.85)", border: "1.5px solid rgba(255,255,255,0.7)",
                     flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between",
                   }}>
                     <div style={{
@@ -394,7 +402,7 @@ export default function DashboardScreen() {
 
                 <div style={{ flex: 1, zIndex: 1 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "3px" }}>
-                    <p style={{ fontSize: "14px", fontWeight: 800, color: "white", fontFamily: "'Nunito',sans-serif", margin: 0 }}>
+                    <p style={{ fontSize: "14px", fontWeight: 800, color: "white", fontFamily: "inherit", margin: 0 }}>
                       AI Health Assistant
                     </p>
                     <span style={{
@@ -423,8 +431,8 @@ export default function DashboardScreen() {
             {/* ── COMMUNITY ── */}
             <Card>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "14px" }}>
-                <p style={{ fontSize: "15px", fontWeight: 800, color: C.navy, fontFamily: "'Nunito',sans-serif" }}>Community</p>
-                <button style={{ background: "none", border: "none", fontSize: "12px", fontWeight: 700, color: C.orange, cursor: "pointer", fontFamily: "'Nunito',sans-serif" }}>
+                <p style={{ fontSize: "15px", fontWeight: 800, color: C.navy, fontFamily: "inherit" }}>Community</p>
+                <button style={{ background: "none", border: "none", fontSize: "12px", fontWeight: 700, color: C.orange, cursor: "pointer", fontFamily: "inherit" }}>
                   See all →
                 </button>
               </div>
@@ -442,7 +450,7 @@ export default function DashboardScreen() {
                     background: post.color, flexShrink: 0,
                     display: "flex", alignItems: "center", justifyContent: "center",
                     fontSize: "11px", fontWeight: 800, color: C.navyLight,
-                    fontFamily: "'Nunito',sans-serif",
+                    fontFamily: "inherit",
                   }}>{post.initials}</div>
                   <div style={{ flex: 1 }}>
                     <div style={{ display: "flex", gap: "6px", alignItems: "center", marginBottom: "3px" }}>
@@ -470,11 +478,13 @@ export default function DashboardScreen() {
 function Card({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (
     <div style={{
-      background: "#FFFFFF",
-      borderRadius: "18px",
-      padding: "16px",
-      boxShadow: "0 2px 12px rgba(18,16,58,0.06)",
-      border: "1.5px solid #000000",
+      background: "rgba(255,255,255,0.58)",
+      backdropFilter: "blur(24px)",
+      WebkitBackdropFilter: "blur(24px)",
+      borderRadius: "28px",
+      padding: "18px",
+      boxShadow: "0 12px 40px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.85)",
+      border: "1.5px solid rgba(255,255,255,0.75)",
       ...style,
     }}>
       {children}

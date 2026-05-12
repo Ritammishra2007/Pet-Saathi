@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-const ORANGE = "#F97316";
+const ORANGE = "#FF9F2D";
 const GRAY   = "#9CA3AF";
-const ACTIVE_BG = "#EBF3FF";
-const ACTIVE_LABEL = "#4A90E2";
+const ACTIVE_BG = "rgba(255,159,45,0.12)";
+const ACTIVE_LABEL = "#FF9F2D";
 
 export default function BottomNav() {
   const pathname = usePathname();
@@ -15,8 +15,11 @@ export default function BottomNav() {
   return (
     <div style={{
       height: "68px",
-      background: "#FFFFFF",
-      borderTop: "1px solid #EEEDF5",
+      background: "rgba(255,255,255,0.7)",
+      backdropFilter: "blur(28px)",
+      WebkitBackdropFilter: "blur(28px)",
+      borderTop: "1px solid rgba(255,255,255,0.6)",
+      boxShadow: "0 -4px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9)",
       display: "flex",
       alignItems: "center",
       justifyContent: "space-around",
@@ -51,7 +54,7 @@ export default function BottomNav() {
             </svg>
           </div>
         </Link>
-        <span style={{ fontSize: "10px", fontWeight: 700, color: ORANGE, fontFamily: "'Nunito',sans-serif" }}>Emergency</span>
+        <span style={{ fontSize: "10px", fontWeight: 700, color: ORANGE, fontFamily: "inherit" }}>Emergency</span>
       </div>
 
       {/* ── COMMUNITY ── */}
@@ -85,7 +88,7 @@ function Tab({ href, label, active, children }: {
         <span style={{
           fontSize: "10px", fontWeight: 700,
           color: active ? ACTIVE_LABEL : GRAY,
-          fontFamily: "'Nunito',sans-serif",
+          fontFamily: "inherit",
         }}>
           {label}
         </span>

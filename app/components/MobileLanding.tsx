@@ -37,7 +37,7 @@ export default function MobileLanding() {
   const slide = SLIDES[current];
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", fontFamily: "'Nunito', sans-serif", background: "#fff" }}>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", fontFamily: "inherit", background: "#fff" }}>
 
       {/* ── Hero photo section (top ~58%) ── */}
       <div style={{ position: "relative", height: "58vh", flexShrink: 0 }}>
@@ -115,7 +115,7 @@ export default function MobileLanding() {
               width: "100%", padding: "17px", borderRadius: "16px",
               background: "linear-gradient(135deg, #2879B0 0%, #4DA8DA 100%)",
               color: "white", fontSize: "17px", fontWeight: 800,
-              border: "none", cursor: "pointer", fontFamily: "'Nunito', sans-serif",
+              border: "none", cursor: "pointer", fontFamily: "inherit",
               boxShadow: "0 8px 24px rgba(40,121,176,0.4)",
             }}>
               Get Started

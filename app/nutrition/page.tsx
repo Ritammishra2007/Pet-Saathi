@@ -54,7 +54,7 @@ export default function NutritionPage() {
   const [tab, setTab] = useState("Schedule");
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "'Nunito', sans-serif" }}>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
 
       {/* Header */}
       <div style={{ background: C.surface, borderBottom: `1px solid ${C.grayLight}` }}>
@@ -86,7 +86,7 @@ export default function NutritionPage() {
               fontWeight: tab === t ? 800 : 600,
               color: tab === t ? C.orange : C.gray,
               borderBottom: tab === t ? `2px solid ${C.orange}` : "2px solid transparent",
-              marginBottom: "-2px", fontFamily: "'Nunito', sans-serif",
+              marginBottom: "-2px", fontFamily: "inherit",
             }}>{t}</button>
           ))}
         </div>
@@ -204,7 +204,7 @@ export default function NutritionPage() {
               <button style={{
                 background: "rgba(255,255,255,0.2)", border: "1px solid rgba(255,255,255,0.3)",
                 borderRadius: "10px", padding: "8px 16px", color: "white",
-                fontSize: "13px", fontWeight: 700, cursor: "pointer", fontFamily: "'Nunito', sans-serif",
+                fontSize: "13px", fontWeight: 700, cursor: "pointer", fontFamily: "inherit",
               }}>Find a Nutritionist →</button>
             </div>
           </>

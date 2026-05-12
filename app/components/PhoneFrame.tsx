@@ -8,7 +8,7 @@ export default function PhoneFrame({ children }: { children: ReactNode }) {
       minHeight: "100vh",
       display: "flex",
       flexDirection: "column",
-      fontFamily: "'Nunito', sans-serif",
+      fontFamily: "inherit",
     }}>
       {children}
     </div>

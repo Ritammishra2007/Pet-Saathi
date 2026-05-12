@@ -40,7 +40,7 @@ export default function VaccinesPage() {
   const upcomingCount= VACCINES.filter(v => v.status === "upcoming").length;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "'Nunito', sans-serif" }}>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
 
       {/* Header */}
       <div style={{ background: C.surface, padding: "20px 20px 0", borderBottom: `1px solid ${C.grayLight}` }}>
@@ -52,7 +52,7 @@ export default function VaccinesPage() {
           <button style={{
             background: C.navy, color: "white", border: "none", borderRadius: "12px",
             padding: "10px 16px", fontSize: "13px", fontWeight: 700, cursor: "pointer",
-            fontFamily: "'Nunito', sans-serif",
+            fontFamily: "inherit",
           }}>+ Add</button>
         </div>
 
@@ -72,7 +72,7 @@ export default function VaccinesPage() {
               fontWeight: tab === t ? 800 : 600,
               color: tab === t ? C.navy : C.gray,
               borderBottom: tab === t ? `2px solid ${C.navy}` : "2px solid transparent",
-              marginBottom: "-1px", fontFamily: "'Nunito', sans-serif",
+              marginBottom: "-1px", fontFamily: "inherit",
             }}>
               {t === "upcoming" ? "Upcoming" : t === "done" ? "Completed" : "All"}
             </button>

@@ -46,7 +46,7 @@ export default function ChecklistPage() {
   }, {});
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "'Nunito', sans-serif" }}>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
 
       {/* Header */}
       <div style={{ background: C.surface, borderBottom: `1px solid ${C.grayLight}` }}>
@@ -83,7 +83,7 @@ export default function ChecklistPage() {
               background: filter === cat ? C.green : C.bg,
               color: filter === cat ? "white" : C.gray,
               border: "none", cursor: "pointer",
-              fontSize: "12px", fontWeight: 700, fontFamily: "'Nunito', sans-serif",
+              fontSize: "12px", fontWeight: 700, fontFamily: "inherit",
             }}>{cat}</button>
           ))}
         </div>

@@ -424,7 +424,7 @@ export default function OnboardingFlow() {
 
             {/* Card sheet over image */}
             <div className="details-sheet">
-              <h2 style={{ fontSize: "22px", fontWeight: 800, color: "#1A2535", margin: "0 0 4px", fontFamily: "'Playfair Display', serif" }}>
+              <h2 style={{ fontSize: "22px", fontWeight: 800, color: "#1A2535", margin: "0 0 4px", fontFamily: "'Playfair Display', Georgia, serif" }}>
                 Tell us about them
               </h2>
               <p style={{ fontSize: "13px", color: "#A8A29E", fontWeight: 600, margin: "0 0 20px" }}>
@@ -509,7 +509,7 @@ export default function OnboardingFlow() {
 
             {/* Question */}
             <div style={{ padding: "18px 24px 0" }}>
-              <h2 style={{ fontSize: "26px", fontWeight: 900, color: "#12103A", lineHeight: 1.35, margin: "0 0 10px", fontFamily: "'Nunito', sans-serif" }}>
+              <h2 style={{ fontSize: "26px", fontWeight: 900, color: "#12103A", lineHeight: 1.35, margin: "0 0 10px", fontFamily: "inherit" }}>
                 Is <span style={{ color: "#FF8A1F", background: "#FFF4EC", borderRadius: "8px", padding: "0 6px" }}>{pet.name || "your pet"}</span> a{" "}
                 <span style={{ background: "linear-gradient(135deg,#FF8A1F,#FFB347)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>newborn</span> pet? 🐾
               </h2>
@@ -533,7 +533,7 @@ export default function OnboardingFlow() {
                 }}>
                 <div style={{ width: "56px", height: "56px", borderRadius: "16px", background: "#D4F0E0", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "28px", flexShrink: 0 }}>🌱</div>
                 <div style={{ flex: 1 }}>
-                  <p style={{ fontSize: "15px", fontWeight: 800, color: pet.isNewPet === true ? "#16A34A" : "#12103A", margin: "0 0 3px", fontFamily: "'Nunito', sans-serif" }}>
+                  <p style={{ fontSize: "15px", fontWeight: 800, color: pet.isNewPet === true ? "#16A34A" : "#12103A", margin: "0 0 3px", fontFamily: "inherit" }}>
                     Yes, {pet.name || "my pet"} is a newborn
                   </p>
                   <p style={{ fontSize: "12px", color: "#9A9AAA", margin: 0 }}>Just born or very young 🌱</p>
@@ -558,7 +558,7 @@ export default function OnboardingFlow() {
                   <Image src="/golden.webp" alt="Dog" fill style={{ objectFit: "cover" }} />
                 </div>
                 <div style={{ flex: 1 }}>
-                  <p style={{ fontSize: "15px", fontWeight: 800, color: "#12103A", margin: "0 0 3px", fontFamily: "'Nunito', sans-serif" }}>
+                  <p style={{ fontSize: "15px", fontWeight: 800, color: "#12103A", margin: "0 0 3px", fontFamily: "inherit" }}>
                     No, {pet.name || "my pet"} is not a newborn
                   </p>
                   <p style={{ fontSize: "12px", color: "#9A9AAA", margin: 0 }}>Already growing and settled 🏡</p>
@@ -818,7 +818,7 @@ export default function OnboardingFlow() {
           font-weight: 800;
           color: #5A6B7A;
           letter-spacing: 0.4px;
-          font-family: 'Nunito', sans-serif;
+          font-family: inherit;
         }
         .details-input {
           width: 100%;
@@ -829,7 +829,7 @@ export default function OnboardingFlow() {
           font-weight: 600;
           color: #1A2535;
           background: #FAFAF9;
-          font-family: 'Nunito', sans-serif;
+          font-family: inherit;
           outline: none;
           transition: border-color 0.2s ease;
           box-sizing: border-box;
@@ -922,7 +922,7 @@ export default function OnboardingFlow() {
           font-weight: 700;
           color: #2B1D16;
           cursor: pointer;
-          font-family: 'Nunito', sans-serif;
+          font-family: inherit;
           box-shadow: 0 2px 8px rgba(43,29,22,0.06);
           transition: all 0.2s ease;
         }
@@ -952,7 +952,7 @@ export default function OnboardingFlow() {
           font-weight: 700;
           color: white;
           cursor: pointer;
-          font-family: 'Nunito', sans-serif;
+          font-family: inherit;
           box-shadow: 0 6px 18px rgba(255,138,31,0.4);
           transition: all 0.2s ease;
         }
@@ -1022,7 +1022,7 @@ export default function OnboardingFlow() {
           outline: none;
           font-size: 16px;
           font-weight: 600;
-          font-family: 'Nunito', sans-serif;
+          font-family: inherit;
           color: #1A2535;
           background: transparent;
           letter-spacing: 1px;
@@ -1045,7 +1045,7 @@ export default function OnboardingFlow() {
           text-align: center;
           font-size: 22px;
           font-weight: 800;
-          font-family: 'Nunito', sans-serif;
+          font-family: inherit;
           color: #1A2535;
           outline: none;
           transition: all 0.2s;
@@ -1054,7 +1054,7 @@ export default function OnboardingFlow() {
         .otp-box:focus { border-color: #FF8A1F; box-shadow: 0 0 0 3px rgba(255,138,31,0.15); }
         .otp-filled { border-color: #16A34A; background: #EDFAF2; }
         .hint-text { font-size: 13px; color: #A8A29E; font-weight: 500; text-align: center; }
-        .link-btn { background: none; border: none; color: #FF8A1F; font-weight: 700; font-size: 13px; cursor: pointer; font-family: 'Nunito', sans-serif; }
+        .link-btn { background: none; border: none; color: #FF8A1F; font-weight: 700; font-size: 13px; cursor: pointer; font-family: inherit; }
 
         /* ── Pet type grid ── */
         .pet-type-list {
@@ -1076,7 +1076,7 @@ export default function OnboardingFlow() {
           box-shadow: 0 2px 8px rgba(43,29,22,0.05);
           width: 100%;
           text-align: left;
-          font-family: 'Nunito', sans-serif;
+          font-family: inherit;
         }
         .pet-type-bar.selected {
           border-color: #FF8A1F;
@@ -1135,7 +1135,7 @@ export default function OnboardingFlow() {
           font-size: 14px;
           font-weight: 600;
           color: #1A2535;
-          font-family: 'Nunito', sans-serif;
+          font-family: inherit;
           background: transparent;
         }
         .other-search::placeholder { color: #A8A29E; }
@@ -1153,7 +1153,7 @@ export default function OnboardingFlow() {
           border: none;
           border-bottom: 1px solid #F5F2EF;
           cursor: pointer;
-          font-family: 'Nunito', sans-serif;
+          font-family: inherit;
           text-align: left;
           transition: background 0.15s ease;
         }
@@ -1183,7 +1183,7 @@ export default function OnboardingFlow() {
           padding: 14px 16px;
           font-size: 15px;
           font-weight: 600;
-          font-family: 'Nunito', sans-serif;
+          font-family: inherit;
           color: #1A2535;
           outline: none;
           transition: border-color 0.2s;
@@ -1203,7 +1203,7 @@ export default function OnboardingFlow() {
           font-weight: 700;
           color: #7A8898;
           cursor: pointer;
-          font-family: 'Nunito', sans-serif;
+          font-family: inherit;
           transition: all 0.2s;
         }
         .unit-active {
@@ -1230,7 +1230,7 @@ export default function OnboardingFlow() {
           border-radius: 16px;
           font-size: 16px;
           font-weight: 800;
-          font-family: 'Nunito', sans-serif;
+          font-family: inherit;
           border: none;
           cursor: pointer;
           transition: all 0.2s ease;
@@ -1365,7 +1365,7 @@ export default function OnboardingFlow() {
           padding: 16px;
           cursor: pointer;
           text-align: left;
-          font-family: 'Nunito', sans-serif;
+          font-family: inherit;
           transition: all 0.2s ease;
           box-shadow: 0 2px 8px rgba(43,29,22,0.05);
         }
@@ -1447,7 +1447,7 @@ export default function OnboardingFlow() {
           color: #A8A29E;
           font-size: 14px;
           font-weight: 600;
-          font-family: 'Nunito', sans-serif;
+          font-family: inherit;
           cursor: pointer;
           padding: 8px;
           text-align: center;

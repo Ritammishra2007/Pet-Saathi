@@ -46,7 +46,7 @@ export default function Navbar() {
           <span
             className="text-xl font-black"
             style={{
-              fontFamily: "'Nunito', sans-serif",
+              fontFamily: "inherit",
               color: "#2B1D16",
               letterSpacing: "-0.3px",
             }}
