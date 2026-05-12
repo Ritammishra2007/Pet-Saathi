@@ -7,7 +7,7 @@ import Link from "next/link";
 import BottomNav from "../components/BottomNav";
 
 const C = {
-  bg: "#F4F2EF", surface: "#FFFFFF", navy: "#12103A",
+  bg: "transparent", surface: "rgba(255,255,255,0.75)", navy: "#12103A",
   gray: "#8A8A9A", grayLight: "#E8E7F0",
   orange: "#F97316", orangeBg: "#FFF4EC",
   green: "#16A34A", greenBg: "#F0FBF4",
@@ -32,10 +32,7 @@ export default function MyPetsPage() {
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke={C.gray} strokeWidth="2.2" strokeLinecap="round"/></svg>
           Back
         </button>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <h1 style={{ fontSize: "22px", fontWeight: 800, color: C.navy, margin: 0 }}>My Pets</h1>
-          <button onClick={() => setShowAdd(true)} style={{ background: C.navy, color: "white", border: "none", borderRadius: "12px", padding: "10px 16px", fontSize: "13px", fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>+ Add Pet</button>
-        </div>
+        <h1 style={{ fontSize: "22px", fontWeight: 800, color: C.navy, margin: 0 }}>My Pets</h1>
       </div>
 
       <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 24px" }}>
@@ -72,7 +69,7 @@ export default function MyPetsPage() {
       {showAdd && (
         <div style={{ position: "fixed", inset: 0, zIndex: 50 }}>
           <div onClick={() => setShowAdd(false)} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.4)" }} />
-          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: C.surface, borderRadius: "24px 24px 0 0", padding: "24px 20px 36px" }}>
+          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "#fff", borderRadius: "24px 24px 0 0", padding: "24px 20px 100px" }}>
             <div style={{ width: "40px", height: "4px", background: C.grayLight, borderRadius: "10px", margin: "0 auto 20px" }} />
             <h2 style={{ fontSize: "20px", fontWeight: 800, color: C.navy, margin: "0 0 20px" }}>Add New Pet</h2>
             <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>

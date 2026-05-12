@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import BottomNav from "../components/BottomNav";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,15 +15,6 @@ const C = {
   red: "#DC2626",
 };
 
-const MENU = [
-  { icon: "🐾", label: "My Pets",        sub: "Bruno · Add member",           color: C.orange, bg: C.orangeBg, href: "/my-pets"        },
-  { icon: "📋", label: "Health Records", sub: "Vaccinations, vet visits",      color: C.teal,   bg: C.tealBg,   href: "/health-records" },
-  { icon: "🔔", label: "Notifications",  sub: "Manage alerts",                 color: C.blue,   bg: C.blueBg,   href: "/notifications"  },
-  { icon: "📍", label: "Nearby Vets",    sub: "Find vets around you",          color: C.green,  bg: C.greenBg,  href: "/nearby-vets"    },
-  { icon: null, label: "Microchip & ID", sub: "Bruno · #985141000012345",      color: C.teal,   bg: C.tealBg,   href: "/microchip"      },
-  { icon: "🤝", label: "Refer a Friend", sub: "Invite pet parents",            color: C.orange, bg: C.orangeBg, href: "/refer"          },
-];
-
 const SETTINGS = [
   { icon: "⚙️", label: "Account Settings",  href: "/settings"  },
   { icon: "🔒", label: "Privacy & Security", href: "/privacy"   },
@@ -31,8 +23,122 @@ const SETTINGS = [
 ];
 
 export default function ProfilePage() {
+  const [petName, setPetName]   = useState("Your Pet");
+  const [petBreed, setPetBreed] = useState("");
+  const [petAge, setPetAge]     = useState("");
+  const [wantsChecklist, setWantsChecklist] = useState(false);
+
+  const [userName, setUserName] = useState("Your Name");
+  const [userEmail, setUserEmail] = useState("");
+  const [userCity, setUserCity] = useState("City");
+
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState({ name: "", email: "", city: "" });
+
+  useEffect(() => {
+    // Pet data from sessionStorage
+    const name  = sessionStorage.getItem("petName")    || "Your Pet";
+    const breed = sessionStorage.getItem("petBreed")   || "";
+    const ageVal= sessionStorage.getItem("petAgeValue")|| "";
+    const ageUnit=sessionStorage.getItem("petAgeUnit") || "";
+    const cl    = sessionStorage.getItem("wantsChecklist") === "true";
+    setPetName(name);
+    setPetBreed(breed);
+    setPetAge(ageVal ? `${ageVal} ${ageUnit}` : "");
+    setWantsChecklist(cl);
+
+    // User profile from localStorage
+    const n = localStorage.getItem("userName")  || "Your Name";
+    const e = localStorage.getItem("userEmail") || "";
+    const c = localStorage.getItem("userCity")  || "City";
+    setUserName(n);
+    setUserEmail(e);
+    setUserCity(c);
+  }, []);
+
+  function openEdit() {
+    setDraft({ name: userName, email: userEmail, city: userCity });
+    setEditing(true);
+  }
+
+  function saveEdit() {
+    const n = draft.name.trim()  || "Your Name";
+    const e = draft.email.trim();
+    const c = draft.city.trim()  || "City";
+    localStorage.setItem("userName",  n);
+    localStorage.setItem("userEmail", e);
+    localStorage.setItem("userCity",  c);
+    setUserName(n);
+    setUserEmail(e);
+    setUserCity(c);
+    setEditing(false);
+  }
+
+  const petTypeEmoji = sessionStorage && typeof window !== "undefined"
+    ? sessionStorage.getItem("petTypeEmoji") || "🐕"
+    : "🐕";
+  const petType = sessionStorage && typeof window !== "undefined"
+    ? sessionStorage.getItem("petType") || "Dog"
+    : "Dog";
+
+  const MENU = [
+    { icon: "🐾", label: "My Pets",        sub: `${petName} · Add member`,      color: C.orange, bg: C.orangeBg, href: "/my-pets"        },
+    { icon: "📋", label: "Health Records", sub: "Vaccinations, vet visits",      color: C.teal,   bg: C.tealBg,   href: "/health-records" },
+    { icon: "🔔", label: "Notifications",  sub: "Manage alerts",                 color: C.blue,   bg: C.blueBg,   href: "/notifications"  },
+    { icon: "📍", label: "Nearby Vets",    sub: "Find vets around you",          color: C.green,  bg: C.greenBg,  href: "/nearby-vets"    },
+    { icon: null, label: "Microchip & ID", sub: `${petName} · Tap to verify`,   color: C.teal,   bg: C.tealBg,   href: "/microchip"      },
+    { icon: "🤝", label: "Refer a Friend", sub: "Invite pet parents",            color: C.orange, bg: C.orangeBg, href: "/refer"          },
+  ];
+
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
+
+      {/* Edit modal */}
+      {editing && (
+        <div style={{
+          position: "fixed", inset: 0, zIndex: 200,
+          background: "rgba(0,0,0,0.4)", display: "flex", alignItems: "flex-end",
+        }} onClick={() => setEditing(false)}>
+          <div style={{
+            width: "100%", maxWidth: "430px", margin: "0 auto",
+            background: "white", borderRadius: "24px 24px 0 0",
+            padding: "24px 20px 40px",
+          }} onClick={e => e.stopPropagation()}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+              <p style={{ fontSize: "17px", fontWeight: 800, color: C.navy, margin: 0 }}>Edit Profile</p>
+              <button onClick={() => setEditing(false)} style={{ background: "none", border: "none", fontSize: "20px", cursor: "pointer", color: C.gray }}>✕</button>
+            </div>
+
+            {[
+              { label: "Full Name", key: "name", placeholder: "Your name", type: "text" },
+              { label: "Email", key: "email", placeholder: "your@email.com", type: "email" },
+              { label: "City", key: "city", placeholder: "Your city", type: "text" },
+            ].map(f => (
+              <div key={f.key} style={{ marginBottom: "16px" }}>
+                <p style={{ fontSize: "11px", fontWeight: 700, color: C.gray, textTransform: "uppercase", letterSpacing: "0.6px", marginBottom: "6px" }}>{f.label}</p>
+                <input
+                  type={f.type}
+                  value={draft[f.key as keyof typeof draft]}
+                  onChange={e => setDraft(d => ({ ...d, [f.key]: e.target.value }))}
+                  placeholder={f.placeholder}
+                  style={{
+                    width: "100%", padding: "12px 14px", borderRadius: "12px",
+                    border: `1.5px solid ${C.grayLight}`, fontSize: "14px", fontWeight: 500,
+                    color: C.navy, outline: "none", fontFamily: "inherit", boxSizing: "border-box",
+                  }}
+                />
+              </div>
+            ))}
+
+            <button onClick={saveEdit} style={{
+              width: "100%", padding: "14px", borderRadius: "14px",
+              background: C.orange, color: "white", fontSize: "15px",
+              fontWeight: 700, border: "none", cursor: "pointer", fontFamily: "inherit",
+              marginTop: "4px",
+            }}>Save Changes</button>
+          </div>
+        </div>
+      )}
 
       <div style={{ background: C.surface, borderBottom: `1px solid ${C.grayLight}`, padding: "24px 20px 20px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
@@ -54,26 +160,26 @@ export default function ProfilePage() {
           </div>
 
           <div style={{ flex: 1 }}>
-            <h2 style={{ fontSize: "20px", fontWeight: 800, color: C.navy, margin: 0 }}>Vishal Mishra</h2>
-            <p style={{ fontSize: "12px", color: C.gray, margin: "2px 0 8px", fontWeight: 500 }}>ritammishra2007@gmail.com</p>
-            <div style={{ display: "flex", gap: "6px" }}>
-              <span style={{ background: C.orangeBg, color: C.orange, fontSize: "11px", fontWeight: 700, padding: "3px 10px", borderRadius: "20px" }}>🐕 Dog Parent</span>
-              <span style={{ background: C.bg, color: C.gray, fontSize: "11px", fontWeight: 600, padding: "3px 10px", borderRadius: "20px" }}>Mumbai</span>
+            <h2 style={{ fontSize: "20px", fontWeight: 800, color: C.navy, margin: 0 }}>{userName}</h2>
+            {userEmail && <p style={{ fontSize: "12px", color: C.gray, margin: "2px 0 8px", fontWeight: 400 }}>{userEmail}</p>}
+            <div style={{ display: "flex", gap: "6px", marginTop: userEmail ? 0 : "8px" }}>
+              <span style={{ background: C.orangeBg, color: C.orange, fontSize: "11px", fontWeight: 700, padding: "3px 10px", borderRadius: "20px" }}>{petTypeEmoji} {petType} Parent</span>
+              <span style={{ background: "rgba(255,255,255,0.6)", color: C.gray, fontSize: "11px", fontWeight: 600, padding: "3px 10px", borderRadius: "20px" }}>{userCity}</span>
             </div>
           </div>
 
-          <button style={{
-            background: C.bg, border: `1px solid ${C.grayLight}`,
+          <button onClick={openEdit} style={{
+            background: C.surface, border: `1px solid ${C.grayLight}`,
             borderRadius: "10px", padding: "8px 14px", cursor: "pointer",
             fontSize: "12px", fontWeight: 700, color: C.navy, fontFamily: "inherit",
           }}>Edit</button>
         </div>
 
-        <div style={{ display: "flex", background: C.bg, borderRadius: "16px", padding: "12px 0" }}>
+        <div style={{ display: "flex", background: "rgba(255,255,255,0.5)", borderRadius: "16px", padding: "12px 0" }}>
           {[{ label: "Pets", value: "1" }, { label: "Posts", value: "7" }, { label: "Days Active", value: "42" }].map((s, i) => (
             <div key={i} style={{ flex: 1, textAlign: "center", borderRight: i < 2 ? `1px solid ${C.grayLight}` : "none" }}>
               <p style={{ fontSize: "20px", fontWeight: 800, color: C.orange, margin: 0 }}>{s.value}</p>
-              <p style={{ fontSize: "11px", color: C.gray, margin: 0, fontWeight: 600 }}>{s.label}</p>
+              <p style={{ fontSize: "11px", color: C.gray, margin: 0, fontWeight: 400 }}>{s.label}</p>
             </div>
           ))}
         </div>
@@ -81,7 +187,7 @@ export default function ProfilePage() {
 
       <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 80px" }}>
 
-        {/* Pet card + Add Member */}
+        {/* Pet card */}
         <div style={{ marginBottom: "20px" }}>
           <div style={{
             background: C.surface, borderRadius: "18px 18px 0 0", padding: "14px 16px",
@@ -90,29 +196,32 @@ export default function ProfilePage() {
           }}>
             <div style={{ position: "relative" }}>
               <div style={{ width: "56px", height: "56px", borderRadius: "16px", overflow: "hidden" }}>
-                <Image src="/profile_picture.jpg" alt="Bruno" width={56} height={56}
+                <Image src="/profile_picture.jpg" alt={petName} width={56} height={56}
                   style={{ objectFit: "cover", objectPosition: "center 20%", width: "100%", height: "100%" }} />
               </div>
               <div style={{ position: "absolute", bottom: -2, right: -2, width: "16px", height: "16px", borderRadius: "50%", background: C.green, border: "2px solid white" }} />
             </div>
             <div style={{ flex: 1 }}>
               <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                <p style={{ fontSize: "15px", fontWeight: 800, color: C.navy, margin: 0 }}>Bruno</p>
+                <p style={{ fontSize: "15px", fontWeight: 800, color: C.navy, margin: 0 }}>{petName}</p>
                 <div style={{ width: "16px", height: "16px", borderRadius: "50%", background: C.orange, display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
                     <path d="M1.5 4.5l2 2 4-4" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
               </div>
-              <p style={{ fontSize: "12px", color: C.gray, margin: 0 }}>Golden Retriever · 2 yrs · Male</p>
+              <p style={{ fontSize: "12px", color: C.gray, margin: 0 }}>
+                {petBreed}{petAge ? ` · ${petAge}` : ""}
+              </p>
             </div>
-            <div style={{ background: C.orangeBg, borderRadius: "10px", padding: "6px 10px", textAlign: "center" }}>
-              <p style={{ fontSize: "10px", color: C.orange, fontWeight: 700, margin: 0 }}>30-Day</p>
-              <p style={{ fontSize: "10px", color: C.orange, fontWeight: 700, margin: 0 }}>Plan ✓</p>
-            </div>
+            {wantsChecklist && (
+              <div style={{ background: C.orangeBg, borderRadius: "10px", padding: "6px 10px", textAlign: "center" }}>
+                <p style={{ fontSize: "10px", color: C.orange, fontWeight: 700, margin: 0 }}>30-Day</p>
+                <p style={{ fontSize: "10px", color: C.orange, fontWeight: 700, margin: 0 }}>Plan ✓</p>
+              </div>
+            )}
           </div>
 
-          {/* Add Member button */}
           <Link href="/my-pets?add=true" style={{ textDecoration: "none" }}>
             <div style={{
               background: C.surface, borderRadius: "0 0 18px 18px", padding: "12px 16px",
@@ -136,7 +245,6 @@ export default function ProfilePage() {
           </Link>
         </div>
 
-        {/* Menu */}
         <p style={{ fontSize: "11px", fontWeight: 800, color: C.gray, letterSpacing: "0.8px", marginBottom: "8px" }}>MY ACCOUNT</p>
         <div style={{
           background: C.surface, borderRadius: "18px",
@@ -172,7 +280,6 @@ export default function ProfilePage() {
           ))}
         </div>
 
-        {/* Settings */}
         <p style={{ fontSize: "11px", fontWeight: 800, color: C.gray, letterSpacing: "0.8px", marginBottom: "8px" }}>SETTINGS</p>
         <div style={{
           background: C.surface, borderRadius: "18px",
@@ -189,7 +296,7 @@ export default function ProfilePage() {
               }}>
                 <div style={{
                   width: "38px", height: "38px", borderRadius: "12px",
-                  background: C.bg, display: "flex", alignItems: "center", justifyContent: "center",
+                  background: "rgba(255,255,255,0.5)", display: "flex", alignItems: "center", justifyContent: "center",
                   fontSize: "18px", flexShrink: 0,
                 }}>{item.icon}</div>
                 <div style={{ flex: 1 }}>
