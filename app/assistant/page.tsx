@@ -177,6 +177,7 @@ export default function AssistantPage() {
       <div style={{
         background: C.surface, borderTop: `1px solid ${C.grayLight}`,
         padding: "10px 16px 12px",
+        marginBottom: "68px",
       }}>
         <div style={{
           display: "flex", alignItems: "center", gap: "10px",
