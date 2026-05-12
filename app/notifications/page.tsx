@@ -53,7 +53,7 @@ export default function NotificationsPage() {
         </div>
       </div>
 
-      <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 24px" }}>
+      <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 80px" }}>
         {tab === "all" && (
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             {ALERTS.map((a, i) => (

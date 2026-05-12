@@ -14,6 +14,12 @@ export default function BottomNav() {
 
   return (
     <div style={{
+      position: "fixed",
+      bottom: 0,
+      left: "50%",
+      transform: "translateX(-50%)",
+      width: "100%",
+      maxWidth: "430px",
       height: "68px",
       background: "rgba(255,255,255,0.7)",
       backdropFilter: "blur(28px)",
@@ -24,7 +30,7 @@ export default function BottomNav() {
       alignItems: "center",
       justifyContent: "space-around",
       paddingBottom: "4px",
-      flexShrink: 0,
+      zIndex: 100,
     }}>
 
       {/* ── HOME ── */}

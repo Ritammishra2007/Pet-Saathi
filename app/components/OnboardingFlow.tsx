@@ -153,24 +153,11 @@ export default function OnboardingFlow() {
                 style={{ objectFit: "cover", objectPosition: "center top" }} priority />
               <div className="auth-hero-fade" />
 
-              {/* Top left logo */}
-              <div style={{ position: "absolute", top: "16px", left: "16px", zIndex: 3 }}>
-                <Image src="/icon.png" alt="Pet Sathi" width={110} height={110} style={{ objectFit: "contain", filter: "drop-shadow(0 4px 16px rgba(0,0,0,0.2))" }} />
-              </div>
-
-              {/* Top right badge */}
-              <div style={{ position: "absolute", top: "16px", right: "16px", zIndex: 3 }}>
-                <div style={{ background: "rgba(255,255,255,0.92)", borderRadius: "20px", padding: "6px 12px", display: "flex", alignItems: "center", gap: "6px", boxShadow: "0 2px 10px rgba(0,0,0,0.12)" }}>
-                  <span style={{ fontSize: "14px" }}>🐾</span>
-                  <span style={{ fontSize: "12px", fontWeight: 800, color: "#1A2535" }}>Trusted by many pet parents 🧡</span>
-                </div>
-              </div>
-
-              {/* Headline */}
+{/* Headline */}
               <div className="auth-logo-wrap">
                 <h1 className="auth-headline">
                   Your pet&apos;s best life<br />
-                  <span className="orange-text">starts here.</span>
+                  <span style={{ color: "#fff", WebkitTextFillColor: "#fff", textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>starts here.</span>
                 </h1>
                 <div style={{ width: "60px", height: "3px", background: "#FF8A1F", borderRadius: "4px", marginTop: "6px" }} />
               </div>

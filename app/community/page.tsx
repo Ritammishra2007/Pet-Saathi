@@ -4,7 +4,7 @@ import BottomNav from "../components/BottomNav";
 import { useState } from "react";
 
 const C = {
-  bg: "#F4F2EF", surface: "#FFFFFF", navy: "#12103A",
+  bg: "transparent", surface: "rgba(255,255,255,0.75)", navy: "#12103A",
   gray: "#8A8A9A", grayLight: "#E8E7F0", orange: "#F97316", orangeBg: "#FFF4EC",
   green: "#16A34A", greenBg: "#F0FBF4", blue: "#2879B0", blueBg: "#EBF5FF",
   purple: "#6D28D9", purpleBg: "#F5F0FF",
@@ -134,7 +134,7 @@ export default function CommunityPage() {
       </div>
 
       {/* Posts */}
-      <div style={{ flex: 1, overflowY: "auto", padding: "12px 16px 20px" }}>
+      <div style={{ flex: 1, overflowY: "auto", padding: "12px 16px 80px" }}>
         {filtered.length === 0 && (
           <div style={{ textAlign: "center", padding: "40px 0", color: C.gray }}>
             <p style={{ fontSize: "32px" }}>🐾</p>

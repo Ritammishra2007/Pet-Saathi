@@ -49,17 +49,8 @@ export default function MobileLanding() {
           background: "linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0) 45%, rgba(255,255,255,0.7) 80%, #ffffff 100%)",
         }} />
 
-        {/* Rating badge */}
-        <div style={{ position: "absolute", top: "16px", right: "16px", zIndex: 10, background: "#F97316", borderRadius: "22px", padding: "8px 14px", display: "flex", alignItems: "center", gap: "5px", boxShadow: "0 4px 14px rgba(249,115,22,0.5)" }}>
-          <span style={{ fontSize: "15px" }}>🐾</span>
-          <span style={{ fontSize: "13px", fontWeight: 800, color: "white" }}>4.9★</span>
-        </div>
 
-        {/* Logo — centered, lower portion of hero */}
-        <div style={{ position: "absolute", bottom: "-82px", left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", paddingBottom: "8px" }}>
-          <Image src="/logo_icon.png" alt="Logo" width={330} height={330} style={{ objectFit: "contain", filter: "drop-shadow(0 4px 16px rgba(0,0,0,0.18))" }} />
-        </div>
-      </div>
+</div>
 
       {/* ── Bottom content — white background ── */}
       <div style={{ flex: 1, background: "#ffffff", padding: "18px 20px 24px", display: "flex", flexDirection: "column", gap: "14px" }}>

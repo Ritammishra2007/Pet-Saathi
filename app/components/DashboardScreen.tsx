@@ -78,7 +78,7 @@ export default function DashboardScreen() {
         <div style={{ position: "absolute", top: "40%", left: "-80px", width: "200px", height: "200px", borderRadius: "50%", background: "radial-gradient(circle, rgba(109,40,217,0.1) 0%, transparent 70%)", filter: "blur(30px)", pointerEvents: "none", zIndex: 0 }} />
         <div style={{ position: "absolute", bottom: "10%", right: "-40px", width: "180px", height: "180px", borderRadius: "50%", background: "radial-gradient(circle, rgba(52,199,89,0.12) 0%, transparent 70%)", filter: "blur(25px)", pointerEvents: "none", zIndex: 0 }} />
 
-        <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden", position: "relative", zIndex: 1 }}>
+        <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden", position: "relative", zIndex: 1, paddingBottom: "80px" }}>
 
           {/* ── HEADER ── */}
           <div style={{ padding: "18px 20px 10px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>

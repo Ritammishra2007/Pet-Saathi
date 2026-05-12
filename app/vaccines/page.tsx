@@ -4,7 +4,7 @@ import BottomNav from "../components/BottomNav";
 import { useState } from "react";
 
 const C = {
-  bg: "#F4F2EF", surface: "#FFFFFF", navy: "#12103A",
+  bg: "transparent", surface: "rgba(255,255,255,0.75)", navy: "#12103A",
   gray: "#8A8A9A", grayLight: "#E8E7F0",
   green: "#16A34A", greenBg: "#F0FBF4",
   amber: "#B45309",  amberBg: "#FFFBEB",
@@ -80,7 +80,7 @@ export default function VaccinesPage() {
         </div>
       </div>
 
-      <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 20px" }}>
+      <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 80px" }}>
 
         {/* Next due banner — muted */}
         {tab !== "done" && (
