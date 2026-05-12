@@ -115,6 +115,11 @@ export default function OnboardingFlow() {
       petAgeUnit:    pet.ageUnit,
       wantsChecklist: String(pet.wantsChecklist === true),
     };
+    // Clear chip data from a previous session
+    ["chipId", "chipVerified"].forEach(k => {
+      sessionStorage.removeItem(k);
+      localStorage.removeItem(k);
+    });
     Object.entries(petData).forEach(([k, v]) => {
       sessionStorage.setItem(k, v);
       localStorage.setItem(k, v);
