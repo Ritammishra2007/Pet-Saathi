@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import BottomNav from "../components/BottomNav";
 
@@ -14,15 +13,25 @@ const C = {
   red: "#DC2626",
 };
 
-const PETS = [
-  { name: "Bruno", breed: "Golden Retriever", age: "2 yrs", gender: "Male", img: "/profile_picture.jpg", active: true },
-];
-
 export default function MyPetsPage() {
   const router = useRouter();
   const [showAdd, setShowAdd] = useState(false);
   const [newName, setNewName] = useState("");
   const [newBreed, setNewBreed] = useState("");
+  const [petName, setPetName] = useState("Bruno");
+  const [petBreed, setPetBreed] = useState("Golden Retriever");
+  const [petAge, setPetAge] = useState("2 yrs");
+  const [petEmoji, setPetEmoji] = useState("🐕");
+
+  useEffect(() => {
+    const g = (k: string) => localStorage.getItem(k) || sessionStorage.getItem(k);
+    setPetName(g("petName")    || "Bruno");
+    setPetBreed(g("petBreed")  || "Golden Retriever");
+    setPetEmoji(g("petTypeEmoji") || "🐕");
+    const ageVal  = g("petAgeValue") || "2";
+    const ageUnit = g("petAgeUnit")  || "yrs";
+    setPetAge(`${ageVal} ${ageUnit}`);
+  }, []);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
@@ -37,23 +46,21 @@ export default function MyPetsPage() {
 
       <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 24px" }}>
 
-        {PETS.map((pet, i) => (
-          <div key={i} style={{ background: C.surface, borderRadius: "18px", padding: "16px", border: `1px solid ${C.grayLight}`, boxShadow: "0 2px 10px rgba(18,16,58,0.05)", marginBottom: "12px", display: "flex", alignItems: "center", gap: "14px" }}>
-            <div style={{ position: "relative" }}>
-              <div style={{ width: "64px", height: "64px", borderRadius: "18px", overflow: "hidden" }}>
-                <Image src={pet.img} alt={pet.name} width={64} height={64} style={{ objectFit: "cover", objectPosition: "center 20%", width: "100%", height: "100%" }} />
-              </div>
-              {pet.active && <div style={{ position: "absolute", bottom: -2, right: -2, width: "14px", height: "14px", borderRadius: "50%", background: C.green, border: "2px solid white" }} />}
+        <div style={{ background: C.surface, borderRadius: "18px", padding: "16px", border: `1px solid ${C.grayLight}`, boxShadow: "0 2px 10px rgba(18,16,58,0.05)", marginBottom: "12px", display: "flex", alignItems: "center", gap: "14px" }}>
+          <div style={{ position: "relative" }}>
+            <div style={{ width: "64px", height: "64px", borderRadius: "18px", background: C.orangeBg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "30px" }}>
+              {petEmoji}
             </div>
-            <div style={{ flex: 1 }}>
-              <p style={{ fontSize: "16px", fontWeight: 800, color: C.navy, margin: "0 0 2px" }}>{pet.name}</p>
-              <p style={{ fontSize: "12px", color: C.gray, margin: 0 }}>{pet.breed} · {pet.age} · {pet.gender}</p>
-            </div>
-            <Link href="/dashboard" style={{ textDecoration: "none" }}>
-              <div style={{ background: C.bg, borderRadius: "10px", padding: "8px 12px", fontSize: "12px", fontWeight: 700, color: C.navy }}>View →</div>
-            </Link>
+            <div style={{ position: "absolute", bottom: -2, right: -2, width: "14px", height: "14px", borderRadius: "50%", background: C.green, border: "2px solid white" }} />
           </div>
-        ))}
+          <div style={{ flex: 1 }}>
+            <p style={{ fontSize: "16px", fontWeight: 800, color: C.navy, margin: "0 0 2px" }}>{petName}</p>
+            <p style={{ fontSize: "12px", color: C.gray, margin: 0 }}>{petBreed} · {petAge}</p>
+          </div>
+          <Link href="/dashboard" style={{ textDecoration: "none" }}>
+            <div style={{ background: C.bg, borderRadius: "10px", padding: "8px 12px", fontSize: "12px", fontWeight: 700, color: C.navy }}>View →</div>
+          </Link>
+        </div>
 
         {/* Add pet card */}
         <button onClick={() => setShowAdd(true)} style={{ width: "100%", background: C.surface, border: `1.5px dashed ${C.orange}`, borderRadius: "18px", padding: "20px", display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", cursor: "pointer", fontFamily: "inherit" }}>
