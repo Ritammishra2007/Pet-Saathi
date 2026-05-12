@@ -37,15 +37,17 @@ export default function ProfilePage() {
 
   useEffect(() => {
     // Pet data from sessionStorage
-    const name  = sessionStorage.getItem("petName")    || "Your Pet";
-    const breed = sessionStorage.getItem("petBreed")   || "";
-    const ageVal= sessionStorage.getItem("petAgeValue")|| "";
-    const ageUnit=sessionStorage.getItem("petAgeUnit") || "";
+    const name  = sessionStorage.getItem("petName")    || "Bruno";
+    const breed = sessionStorage.getItem("petBreed")   || "Golden Retriever";
+    const ageVal= sessionStorage.getItem("petAgeValue")|| "2";
+    const ageUnit=sessionStorage.getItem("petAgeUnit") || "yrs";
     const cl    = sessionStorage.getItem("wantsChecklist") === "true";
     setPetName(name);
     setPetBreed(breed);
     setPetAge(ageVal ? `${ageVal} ${ageUnit}` : "");
     setWantsChecklist(cl);
+    setPetTypeEmoji(sessionStorage.getItem("petTypeEmoji") || "🐕");
+    setPetType(sessionStorage.getItem("petType") || "Dog");
 
     // User profile from localStorage
     const n = localStorage.getItem("userName")  || "Your Name";
@@ -74,12 +76,8 @@ export default function ProfilePage() {
     setEditing(false);
   }
 
-  const petTypeEmoji = sessionStorage && typeof window !== "undefined"
-    ? sessionStorage.getItem("petTypeEmoji") || "🐕"
-    : "🐕";
-  const petType = sessionStorage && typeof window !== "undefined"
-    ? sessionStorage.getItem("petType") || "Dog"
-    : "Dog";
+  const [petTypeEmoji, setPetTypeEmoji] = useState("🐕");
+  const [petType, setPetType] = useState("Dog");
 
   const MENU = [
     { icon: "🐾", label: "My Pets",        sub: `${petName} · Add member`,      color: C.orange, bg: C.orangeBg, href: "/my-pets"        },
@@ -140,46 +138,56 @@ export default function ProfilePage() {
         </div>
       )}
 
-      <div style={{ background: C.surface, borderBottom: `1px solid ${C.grayLight}`, padding: "24px 20px 20px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
-          <div style={{ position: "relative", flexShrink: 0 }}>
-            <div style={{ width: "72px", height: "72px", borderRadius: "50%", overflow: "hidden", border: `3px solid ${C.orangeBg}` }}>
-              <Image src="/profile_picture.jpg" alt="Profile" width={72} height={72}
-                style={{ objectFit: "cover", width: "100%", height: "100%" }} />
-            </div>
-            <div style={{
-              position: "absolute", bottom: 1, right: 1,
-              width: "20px", height: "20px", borderRadius: "50%",
-              background: C.orange, border: "2px solid white",
-              display: "flex", alignItems: "center", justifyContent: "center",
-            }}>
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                <path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
+      {/* Profile header */}
+      <div style={{
+        background: "rgba(255,255,255,0.88)",
+        backdropFilter: "blur(32px)",
+        WebkitBackdropFilter: "blur(32px)",
+        borderBottom: `1px solid ${C.grayLight}`,
+        padding: "16px 16px 16px", position: "relative",
+      }}>
+
+        {/* Edit button — top right */}
+        <button onClick={openEdit} style={{
+          position: "absolute", top: "16px", right: "16px",
+          background: "rgba(255,255,255,0.8)", border: `1px solid ${C.grayLight}`,
+          borderRadius: "10px", padding: "6px 14px", cursor: "pointer",
+          fontSize: "12px", fontWeight: 700, color: C.navy, fontFamily: "inherit",
+        }}>Edit</button>
+
+        {/* Avatar + info row */}
+        <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "16px" }}>
+          <div style={{
+            width: "64px", height: "64px", borderRadius: "50%", flexShrink: 0,
+            background: "linear-gradient(135deg, #F97316, #FBBF24)",
+            border: "2.5px solid white", display: "flex", alignItems: "center",
+            justifyContent: "center", boxShadow: "0 4px 14px rgba(249,115,22,0.25)",
+          }}>
+            <span style={{ fontSize: "26px", fontWeight: 800, color: "white" }}>
+              {userName.charAt(0).toUpperCase()}
+            </span>
           </div>
 
           <div style={{ flex: 1 }}>
-            <h2 style={{ fontSize: "20px", fontWeight: 800, color: C.navy, margin: 0 }}>{userName}</h2>
-            {userEmail && <p style={{ fontSize: "12px", color: C.gray, margin: "2px 0 8px", fontWeight: 400 }}>{userEmail}</p>}
-            <div style={{ display: "flex", gap: "6px", marginTop: userEmail ? 0 : "8px" }}>
-              <span style={{ background: C.orangeBg, color: C.orange, fontSize: "11px", fontWeight: 700, padding: "3px 10px", borderRadius: "20px" }}>{petTypeEmoji} {petType} Parent</span>
-              <span style={{ background: "rgba(255,255,255,0.6)", color: C.gray, fontSize: "11px", fontWeight: 600, padding: "3px 10px", borderRadius: "20px" }}>{userCity}</span>
-            </div>
+            <h2 style={{ fontSize: "18px", fontWeight: 800, color: C.navy, margin: "0 0 2px" }}>{userName}</h2>
+            {userEmail && <p style={{ fontSize: "11px", color: C.gray, margin: "0 0 6px", fontWeight: 400 }}>{userEmail}</p>}
+            <span style={{
+              background: "rgba(255,255,255,0.7)", color: C.gray,
+              fontSize: "11px", fontWeight: 600, padding: "3px 10px",
+              borderRadius: "20px", border: `1px solid ${C.grayLight}`,
+            }}>📍 {userCity}</span>
           </div>
-
-          <button onClick={openEdit} style={{
-            background: C.surface, border: `1px solid ${C.grayLight}`,
-            borderRadius: "10px", padding: "8px 14px", cursor: "pointer",
-            fontSize: "12px", fontWeight: 700, color: C.navy, fontFamily: "inherit",
-          }}>Edit</button>
         </div>
 
-        <div style={{ display: "flex", background: "rgba(255,255,255,0.5)", borderRadius: "16px", padding: "12px 0" }}>
+        {/* Stats */}
+        <div style={{
+          display: "flex", background: C.orangeBg, borderRadius: "16px",
+          padding: "10px 0", border: `1px solid rgba(249,115,22,0.15)`,
+        }}>
           {[{ label: "Pets", value: "1" }, { label: "Posts", value: "7" }, { label: "Days Active", value: "42" }].map((s, i) => (
-            <div key={i} style={{ flex: 1, textAlign: "center", borderRight: i < 2 ? `1px solid ${C.grayLight}` : "none" }}>
-              <p style={{ fontSize: "20px", fontWeight: 800, color: C.orange, margin: 0 }}>{s.value}</p>
-              <p style={{ fontSize: "11px", color: C.gray, margin: 0, fontWeight: 400 }}>{s.label}</p>
+            <div key={i} style={{ flex: 1, textAlign: "center", borderRight: i < 2 ? `1px solid rgba(249,115,22,0.15)` : "none" }}>
+              <p style={{ fontSize: "18px", fontWeight: 800, color: C.orange, margin: 0 }}>{s.value}</p>
+              <p style={{ fontSize: "10px", color: C.gray, margin: "1px 0 0", fontWeight: 500 }}>{s.label}</p>
             </div>
           ))}
         </div>

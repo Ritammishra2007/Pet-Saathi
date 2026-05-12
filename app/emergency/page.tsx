@@ -4,7 +4,7 @@ import BottomNav from "../components/BottomNav";
 import { useState } from "react";
 
 const C = {
-  bg: "#F4F2EF", surface: "#FFFFFF", navy: "#12103A",
+  bg: "transparent", surface: "rgba(255,255,255,0.75)", navy: "#12103A",
   gray: "#8A8A9A", grayLight: "#E8E7F0", orange: "#F97316", orangeBg: "#FFF4EC",
   green: "#16A34A", greenBg: "#F0FBF4", red: "#DC2626", redBg: "#FEF2F2",
   blue: "#2879B0", blueBg: "#EBF5FF", purple: "#6D28D9",
@@ -27,10 +27,16 @@ const TIPS = [
 export default function EmergencyPage() {
   const [aiText, setAiText] = useState("");
   const [response, setResponse] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const simulateAi = () => {
     if (!aiText.trim()) return;
-    setResponse("Based on your description, this may indicate mild gastrointestinal irritation. Keep Bruno calm, withhold food for 2 hours, and ensure fresh water is available. If symptoms worsen or persist beyond 6 hours, visit a vet immediately. 🩺");
+    setResponse("");
+    setLoading(true);
+    setTimeout(() => {
+      setResponse(`Based on your description ("${aiText.trim()}"), this may indicate mild gastrointestinal irritation. Keep Bruno calm, withhold food for 2 hours, and ensure fresh water is available. If symptoms worsen or persist beyond 6 hours, visit a vet immediately. 🩺`);
+      setLoading(false);
+    }, 900);
   };
 
   return (
@@ -38,96 +44,127 @@ export default function EmergencyPage() {
 
       {/* Emergency header */}
       <div style={{
-        background: `linear-gradient(145deg, #CC1F1F, ${C.red})`,
-        padding: "28px 20px 20px",
+        background: "linear-gradient(135deg, rgba(220,38,38,0.12) 0%, rgba(255,255,255,0.85) 100%)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        borderBottom: "1px solid rgba(220,38,38,0.15)",
+        padding: "24px 20px 16px",
       }}>
-        <p style={{ fontSize: "12px", fontWeight: 700, color: "rgba(255,255,255,0.65)", margin: "0 0 4px" }}>Bruno is in trouble?</p>
-        <h1 style={{ fontSize: "24px", fontWeight: 800, color: "white", margin: 0 }}>Emergency Help 🆘</h1>
-        <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.75)", margin: "6px 0 0", fontWeight: 500 }}>Fast access to vets, first aid, and AI guidance.</p>
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px" }}>
+          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: C.red, boxShadow: `0 0 6px ${C.red}` }} />
+          <p style={{ fontSize: "12px", fontWeight: 700, color: C.red, margin: 0, letterSpacing: "0.4px" }}>EMERGENCY</p>
+        </div>
+        <h1 style={{ fontSize: "22px", fontWeight: 800, color: C.navy, margin: 0 }}>Emergency Help</h1>
+        <p style={{ fontSize: "13px", color: C.gray, margin: "4px 0 0", fontWeight: 400 }}>Fast access to vets, first aid, and AI guidance.</p>
       </div>
 
-      <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 20px" }}>
+      <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 80px" }}>
 
         {/* SOS + Call buttons */}
         <div style={{ display: "flex", gap: "12px", marginBottom: "16px" }}>
           <button style={{
-            flex: 1, padding: "16px", borderRadius: "16px",
-            background: C.red, color: "white", border: "none", cursor: "pointer",
-            display: "flex", flexDirection: "column", alignItems: "center", gap: "4px",
-            boxShadow: `0 8px 24px ${C.red}50`,
+            flex: 1, padding: "14px", borderRadius: "14px",
+            background: C.redBg, color: C.navy,
+            border: `1px solid rgba(220,38,38,0.2)`,
+            borderLeft: `3px solid ${C.red}`,
+            cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: "4px",
+            boxShadow: "0 2px 10px rgba(220,38,38,0.08)",
           }}>
-            <span style={{ fontSize: "24px" }}>📞</span>
-            <span style={{ fontSize: "13px", fontWeight: 800 }}>Call Nearest Vet</span>
-            <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.75)" }}>Dr. Sonal · 0.8 km</span>
+            <span style={{ fontSize: "22px" }}>📞</span>
+            <span style={{ fontSize: "13px", fontWeight: 700, color: C.red }}>Call Nearest Vet</span>
+            <span style={{ fontSize: "11px", color: C.gray }}>Dr. Sonal · 0.8 km</span>
           </button>
           <button style={{
-            flex: 1, padding: "16px", borderRadius: "16px",
-            background: C.orange, color: "white", border: "none", cursor: "pointer",
-            display: "flex", flexDirection: "column", alignItems: "center", gap: "4px",
-            boxShadow: `0 8px 24px ${C.orange}50`,
+            flex: 1, padding: "14px", borderRadius: "14px",
+            background: C.orangeBg, color: C.navy,
+            border: `1px solid rgba(249,115,22,0.2)`,
+            borderLeft: `3px solid ${C.orange}`,
+            cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: "4px",
+            boxShadow: "0 2px 10px rgba(249,115,22,0.08)",
           }}>
-            <span style={{ fontSize: "24px" }}>🗺️</span>
-            <span style={{ fontSize: "13px", fontWeight: 800 }}>Navigate to Vet</span>
-            <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.75)" }}>Open in Maps</span>
+            <span style={{ fontSize: "22px" }}>🗺️</span>
+            <span style={{ fontSize: "13px", fontWeight: 700, color: C.orange }}>Navigate to Vet</span>
+            <span style={{ fontSize: "11px", color: C.gray }}>Open in Maps</span>
           </button>
         </div>
 
         {/* AI Symptom Checker */}
-        <div style={{
-          background: C.surface, borderRadius: "18px", padding: "16px",
-          boxShadow: "0 2px 12px rgba(18,16,58,0.06)", border: `1px solid ${C.grayLight}`,
-          marginBottom: "16px",
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
-            <div style={{
-              width: "36px", height: "36px", borderRadius: "12px",
-              background: "linear-gradient(135deg, #12103A, #3D3A6B)",
-              display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px",
-            }}>🤖</div>
-            <div>
-              <p style={{ fontSize: "14px", fontWeight: 800, color: C.navy, margin: 0 }}>AI Symptom Checker</p>
-              <p style={{ fontSize: "11px", color: C.gray, margin: 0 }}>Describe Bruno's symptoms</p>
+        <div style={{ marginBottom: "16px" }}>
+          {/* Header — matches dashboard AI card */}
+          <div style={{
+            background: "linear-gradient(135deg, #0D9488 0%, #0EA5E9 100%)",
+            borderRadius: "18px 18px 0 0", padding: "14px 16px",
+            display: "flex", alignItems: "center", gap: "14px",
+            boxShadow: "0 4px 16px rgba(13,148,136,0.25)",
+            position: "relative", overflow: "hidden",
+          }}>
+            <div style={{ position: "absolute", top: -14, right: 20, width: 60, height: 60, borderRadius: "50%", background: "rgba(255,255,255,0.08)", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", bottom: -12, right: -8, width: 48, height: 48, borderRadius: "50%", background: "rgba(255,255,255,0.06)", pointerEvents: "none" }} />
+            <div style={{ width: "44px", height: "44px", borderRadius: "12px", flexShrink: 0, background: "rgba(255,255,255,0.18)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6 3v7a6 6 0 006 6 6 6 0 006-6V3" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                <path d="M6 3H4M6 3h2M18 3h-2M18 3h2" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                <circle cx="18" cy="17" r="3" stroke="white" strokeWidth="2"/>
+                <path d="M12 16v1" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            </div>
+            <div style={{ flex: 1, zIndex: 1 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "2px" }}>
+                <p style={{ fontSize: "14px", fontWeight: 800, color: "white", margin: 0 }}>AI Symptom Checker</p>
+                <span style={{ fontSize: "9px", fontWeight: 800, color: "#CCFBF1", background: "rgba(204,251,241,0.2)", borderRadius: "6px", padding: "2px 6px", letterSpacing: "0.5px" }}>AI</span>
+              </div>
+              <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.75)", fontWeight: 400, margin: 0 }}>Describe Bruno's symptoms</p>
             </div>
           </div>
 
-          <textarea
-            value={aiText}
-            onChange={e => setAiText(e.target.value)}
-            placeholder="e.g. Bruno is vomiting and seems lethargic since morning..."
-            style={{
-              width: "100%", background: C.bg, border: "none", borderRadius: "12px",
-              padding: "12px", fontSize: "13px", fontFamily: "inherit",
-              color: C.navy, resize: "none", minHeight: "80px", outline: "none",
-              boxSizing: "border-box",
-            }}
-          />
+          {/* Input body */}
+          <div style={{
+            background: C.surface, borderRadius: "0 0 18px 18px", padding: "14px 16px",
+            border: `1px solid ${C.grayLight}`, borderTop: "none",
+            boxShadow: "0 4px 16px rgba(18,16,58,0.06)",
+          }}>
+            <textarea
+              value={aiText}
+              onChange={e => setAiText(e.target.value)}
+              placeholder="e.g. Bruno is vomiting and seems lethargic since morning..."
+              style={{
+                width: "100%", background: "rgba(255,255,255,0.5)", border: `1px solid ${C.grayLight}`,
+                borderRadius: "12px", padding: "12px", fontSize: "13px", fontFamily: "inherit",
+                color: C.navy, resize: "none", minHeight: "80px", outline: "none",
+                boxSizing: "border-box",
+              }}
+            />
 
-          {response && (
-            <div style={{
-              background: C.blueBg, borderRadius: "12px", padding: "12px 14px",
-              marginTop: "10px", border: `1px solid ${C.blue}30`,
-            }}>
-              <p style={{ fontSize: "12px", color: C.blue, fontWeight: 700, margin: "0 0 4px" }}>AI Response</p>
-              <p style={{ fontSize: "12px", color: C.navy, margin: 0, lineHeight: 1.5 }}>{response}</p>
-            </div>
-          )}
+            {(loading || response) && (
+              <div style={{
+                background: "rgba(13,148,136,0.07)", borderRadius: "12px", padding: "12px 14px",
+                marginTop: "10px", border: "1px solid rgba(13,148,136,0.15)",
+              }}>
+                <p style={{ fontSize: "12px", color: "#0D9488", fontWeight: 700, margin: "0 0 4px" }}>AI Response</p>
+                <p style={{ fontSize: "12px", color: loading ? C.gray : C.navy, margin: 0, lineHeight: 1.5 }}>
+                  {loading ? "Analysing symptoms..." : response}
+                </p>
+              </div>
+            )}
 
-          <button
-            onClick={simulateAi}
-            style={{
-              width: "100%", marginTop: "10px", padding: "12px",
-              background: `linear-gradient(135deg, #12103A, #3D3A6B)`,
-              color: "white", border: "none", borderRadius: "12px",
-              fontSize: "13px", fontWeight: 700, cursor: "pointer",
-              fontFamily: "inherit",
-            }}
-          >
-            Get AI Guidance →
-          </button>
+            <button
+              onClick={simulateAi}
+              disabled={loading}
+              style={{
+                width: "100%", marginTop: "10px", padding: "13px",
+                background: loading ? C.grayLight : "linear-gradient(135deg, #0D9488 0%, #0EA5E9 100%)",
+                color: loading ? C.gray : "white", border: "none", borderRadius: "12px",
+                fontSize: "13px", fontWeight: 700, cursor: loading ? "default" : "pointer",
+                fontFamily: "inherit", boxShadow: loading ? "none" : "0 4px 14px rgba(13,148,136,0.3)",
+              }}
+            >
+              {loading ? "Analysing..." : "Get AI Guidance →"}
+            </button>
+          </div>
         </div>
 
         {/* Nearby Vets */}
-        <p style={{ fontSize: "11px", fontWeight: 800, color: C.gray, letterSpacing: "0.8px", marginBottom: "10px" }}>NEARBY VETS</p>
+        <p style={{ fontSize: "11px", fontWeight: 800, color: C.navy, letterSpacing: "0.8px", marginBottom: "10px" }}>NEARBY VETS</p>
         {VETS.map((vet, i) => (
           <div key={i} style={{
             background: C.surface, borderRadius: "16px", padding: "14px 16px",
@@ -156,18 +193,20 @@ export default function EmergencyPage() {
             </div>
             <div style={{
               width: "36px", height: "36px", borderRadius: "50%",
-              background: vet.status === "Open" ? C.orangeBg : C.grayLight,
+              background: vet.status === "Open" ? "#FEF9C3" : C.grayLight,
+              border: "1px solid rgba(0,0,0,0.15)",
               display: "flex", alignItems: "center", justifyContent: "center",
             }}>
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M3 15l4-4m0 0l1.5-6L15 3l-2 7.5-6 1.5z" stroke={vet.status === "Open" ? C.orange : C.gray} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill={C.navy} stroke={C.navy} strokeWidth="1"/>
+                <circle cx="12" cy="9" r="2.5" fill="white"/>
               </svg>
             </div>
           </div>
         ))}
 
         {/* First Aid Tips */}
-        <p style={{ fontSize: "11px", fontWeight: 800, color: C.gray, letterSpacing: "0.8px", margin: "16px 0 10px" }}>QUICK FIRST AID</p>
+        <p style={{ fontSize: "11px", fontWeight: 800, color: C.navy, letterSpacing: "0.8px", margin: "16px 0 10px" }}>QUICK FIRST AID</p>
         {TIPS.map((tip, i) => (
           <div key={i} style={{
             background: C.surface, borderRadius: "14px", padding: "12px 14px",
