@@ -1,7 +1,7 @@
 "use client";
 
 import BottomNav from "../components/BottomNav";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const C = {
@@ -54,6 +54,16 @@ const TABS = ["Schedule", "Avoid", "Tips"];
 export default function NutritionPage() {
   const router = useRouter();
   const [tab, setTab] = useState("Schedule");
+  const [petLabel, setPetLabel] = useState("Bruno · Golden Retriever · 2 yrs");
+
+  useEffect(() => {
+    const g = (k: string) => localStorage.getItem(k) || sessionStorage.getItem(k);
+    const name  = g("petName")    || "Bruno";
+    const breed = g("petBreed")   || "Golden Retriever";
+    const ageVal= g("petAgeValue")|| "2";
+    const ageUnit=g("petAgeUnit") || "yrs";
+    setPetLabel(`${name} · ${breed} · ${ageVal} ${ageUnit}`);
+  }, []);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
@@ -65,7 +75,7 @@ export default function NutritionPage() {
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke={C.navy} strokeWidth="2.2" strokeLinecap="round"/></svg>
             Back
           </button>
-          <p style={{ fontSize: "12px", color: C.gray, fontWeight: 600, marginBottom: "2px" }}>Bruno · Golden Retriever · 1yr</p>
+          <p style={{ fontSize: "12px", color: C.gray, fontWeight: 600, marginBottom: "2px" }}>{petLabel}</p>
           <h1 style={{ fontSize: "22px", fontWeight: 800, color: C.navy, margin: 0 }}>Nutrition Guide</h1>
         </div>
 

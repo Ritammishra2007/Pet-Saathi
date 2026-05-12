@@ -106,13 +106,19 @@ export default function OnboardingFlow() {
   const finish = async () => {
     setLoading(true);
     await new Promise((r) => setTimeout(r, 800));
-    if (pet.name)     sessionStorage.setItem("petName",       pet.name);
-    if (pet.type)     sessionStorage.setItem("petType",       pet.type);
-    if (pet.typeEmoji)sessionStorage.setItem("petTypeEmoji",  pet.typeEmoji);
-    if (pet.breed)    sessionStorage.setItem("petBreed",      pet.breed);
-    if (pet.ageValue) sessionStorage.setItem("petAgeValue",   pet.ageValue);
-    sessionStorage.setItem("petAgeUnit",      pet.ageUnit);
-    sessionStorage.setItem("wantsChecklist",  String(pet.wantsChecklist === true));
+    const petData: Record<string, string> = {
+      petName:       pet.name       || "",
+      petType:       pet.type       || "",
+      petTypeEmoji:  pet.typeEmoji  || "",
+      petBreed:      pet.breed      || "",
+      petAgeValue:   pet.ageValue   || "",
+      petAgeUnit:    pet.ageUnit,
+      wantsChecklist: String(pet.wantsChecklist === true),
+    };
+    Object.entries(petData).forEach(([k, v]) => {
+      sessionStorage.setItem(k, v);
+      localStorage.setItem(k, v);
+    });
     preserveDashboardData();
     router.push("/dashboard");
   };

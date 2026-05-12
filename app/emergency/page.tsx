@@ -1,7 +1,7 @@
 "use client";
 
 import BottomNav from "../components/BottomNav";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const C = {
@@ -82,17 +82,23 @@ const TIPS = [
 
 export default function EmergencyPage() {
   const router = useRouter();
+  const [petName, setPetName] = useState("Bruno");
   const [aiText, setAiText] = useState("");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedTip, setSelectedTip] = useState<typeof TIPS[0] | null>(null);
+
+  useEffect(() => {
+    const g = (k: string) => localStorage.getItem(k) || sessionStorage.getItem(k);
+    setPetName(g("petName") || "Bruno");
+  }, []);
 
   const simulateAi = () => {
     if (!aiText.trim()) return;
     setResponse("");
     setLoading(true);
     setTimeout(() => {
-      setResponse(`Based on your description ("${aiText.trim()}"), this may indicate mild gastrointestinal irritation. Keep Bruno calm, withhold food for 2 hours, and ensure fresh water is available. If symptoms worsen or persist beyond 6 hours, visit a vet immediately. 🩺`);
+      setResponse(`Based on your description ("${aiText.trim()}"), this may indicate mild gastrointestinal irritation. Keep ${petName} calm, withhold food for 2 hours, and ensure fresh water is available. If symptoms worsen or persist beyond 6 hours, visit a vet immediately. 🩺`);
       setLoading(false);
     }, 900);
   };
@@ -181,7 +187,7 @@ export default function EmergencyPage() {
                 <p style={{ fontSize: "14px", fontWeight: 800, color: "white", margin: 0 }}>AI Symptom Checker</p>
                 <span style={{ fontSize: "9px", fontWeight: 800, color: "#CCFBF1", background: "rgba(204,251,241,0.2)", borderRadius: "6px", padding: "2px 6px", letterSpacing: "0.5px" }}>AI</span>
               </div>
-              <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.75)", fontWeight: 400, margin: 0 }}>Describe Bruno's symptoms</p>
+              <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.75)", fontWeight: 400, margin: 0 }}>Describe {petName}&apos;s symptoms</p>
             </div>
           </div>
 
@@ -194,7 +200,7 @@ export default function EmergencyPage() {
             <textarea
               value={aiText}
               onChange={e => setAiText(e.target.value)}
-              placeholder="e.g. Bruno is vomiting and seems lethargic since morning..."
+              placeholder={`e.g. ${petName} is vomiting and seems lethargic since morning...`}
               style={{
                 width: "100%", background: "rgba(255,255,255,0.5)", border: `1px solid ${C.grayLight}`,
                 borderRadius: "12px", padding: "12px", fontSize: "13px", fontFamily: "inherit",

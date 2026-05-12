@@ -1,7 +1,7 @@
 "use client";
 
 import BottomNav from "../components/BottomNav";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const C = {
@@ -35,6 +35,12 @@ export default function ChecklistPage() {
   const router = useRouter();
   const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS);
   const [filter, setFilter] = useState("All");
+  const [petName, setPetName] = useState("Bruno");
+
+  useEffect(() => {
+    const g = (k: string) => localStorage.getItem(k) || sessionStorage.getItem(k);
+    setPetName(g("petName") || "Bruno");
+  }, []);
 
   const toggle = (id: number) => setTasks(prev => prev.map(t => t.id === id ? { ...t, done: !t.done } : t));
 
@@ -57,7 +63,7 @@ export default function ChecklistPage() {
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke={C.navy} strokeWidth="2.2" strokeLinecap="round"/></svg>
             Back
           </button>
-          <p style={{ fontSize: "12px", color: C.gray, fontWeight: 600, marginBottom: "2px" }}>Bruno · New Pet Plan</p>
+          <p style={{ fontSize: "12px", color: C.gray, fontWeight: 600, marginBottom: "2px" }}>{petName} · New Pet Plan</p>
           <h1 style={{ fontSize: "22px", fontWeight: 800, color: C.navy, margin: 0 }}>30-Day Checklist</h1>
         </div>
 
@@ -167,7 +173,7 @@ export default function ChecklistPage() {
           }}>
             <p style={{ fontSize: "32px", margin: 0 }}>🎉</p>
             <p style={{ fontSize: "18px", fontWeight: 800, color: "white", margin: "8px 0 4px" }}>All Done!</p>
-            <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.8)", margin: 0 }}>Bruno has completed his 30-day care plan. You're an amazing pet parent!</p>
+            <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.8)", margin: 0 }}>{petName} has completed the 30-day care plan. You&apos;re an amazing pet parent!</p>
           </div>
         )}
       </div>

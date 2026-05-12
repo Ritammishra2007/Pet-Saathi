@@ -38,32 +38,32 @@ export default function DashboardScreen() {
   const router = useRouter();
   const [petName,  setPetName]  = useState("Bruno");
   const [petBreed, setPetBreed] = useState("Golden Retriever");
-  const [petAge,   setPetAge]   = useState("12 May 2024");
+  const [petAge,   setPetAge]   = useState("2 yrs old");
   const [chipVerified, setChipVerified] = useState(false);
   const [chipId, setChipId] = useState("");
   const [wantsChecklist, setWantsChecklist] = useState(true);
 
+  function getVal(key: string) {
+    return localStorage.getItem(key) || sessionStorage.getItem(key);
+  }
+
   function syncFromStorage() {
-    const name    = sessionStorage.getItem("petName");
-    const breed   = sessionStorage.getItem("petBreed");
-    const ageVal  = sessionStorage.getItem("petAgeValue");
-    const ageUnit = sessionStorage.getItem("petAgeUnit");
-    const chip    = sessionStorage.getItem("chipVerified");
-    const id      = sessionStorage.getItem("chipId");
+    const name    = getVal("petName");
+    const breed   = getVal("petBreed");
+    const ageVal  = getVal("petAgeValue");
+    const ageUnit = getVal("petAgeUnit");
+    const chip    = getVal("chipVerified");
+    const id      = getVal("chipId");
     if (name)  setPetName(name);
     if (breed) setPetBreed(breed);
     if (ageVal && ageUnit) setPetAge(`${ageVal} ${ageUnit} old`);
     setChipVerified(chip === "true");
     if (id) setChipId(id);
-    const cl = sessionStorage.getItem("wantsChecklist");
+    const cl = getVal("wantsChecklist");
     if (cl !== null) setWantsChecklist(cl === "true");
   }
 
   useEffect(() => {
-    // If the stored ID doesn't match the current module's ID, it's a page reload → clear
-    if (sessionStorage.getItem("_pageLoadId") !== PAGE_LOAD_ID) {
-      sessionStorage.clear();
-    }
     syncFromStorage();
     window.addEventListener("focus", syncFromStorage);
     return () => window.removeEventListener("focus", syncFromStorage);

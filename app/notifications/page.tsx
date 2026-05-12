@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import BottomNav from "../components/BottomNav";
 
@@ -34,6 +34,12 @@ export default function NotificationsPage() {
   const router = useRouter();
   const [tab, setTab] = useState<"all" | "settings">("all");
   const [prefs, setPrefs] = useState<Record<string, boolean>>({ vaccine: true, vet: true, checklist: true, community: false, tips: true });
+  const [petName, setPetName] = useState("Bruno");
+
+  useEffect(() => {
+    const g = (k: string) => localStorage.getItem(k) || sessionStorage.getItem(k);
+    setPetName(g("petName") || "Bruno");
+  }, []);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
@@ -75,7 +81,7 @@ export default function NotificationsPage() {
         {tab === "settings" && (
           <div>
             <p style={{ fontSize: "13px", color: C.gray, fontWeight: 600, marginBottom: "16px", lineHeight: 1.5 }}>
-              Choose which notifications you want to receive for Bruno.
+              Choose which notifications you want to receive for {petName}.
             </p>
             <div style={{ background: C.surface, borderRadius: "18px", border: `1px solid ${C.grayLight}`, overflow: "hidden" }}>
               {PREFS.map((p, i) => (

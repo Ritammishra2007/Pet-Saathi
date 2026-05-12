@@ -38,12 +38,18 @@ function getResponse(text: string): string {
 
 export default function AssistantPage() {
   const router = useRouter();
-  const [messages, setMessages] = useState<Message[]>([
-    { role: "ai", text: "Hi! I'm Bruno's AI Health Assistant. Ask me anything about his diet, symptoms, behaviour, or general care. 🐾" },
-  ]);
+  const [petName, setPetName] = useState("Bruno");
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const g = (k: string) => localStorage.getItem(k) || sessionStorage.getItem(k);
+    const name = g("petName") || "Bruno";
+    setPetName(name);
+    setMessages([{ role: "ai", text: `Hi! I'm ${name}'s AI Health Assistant. Ask me anything about ${name}'s diet, symptoms, behaviour, or general care. 🐾` }]);
+  }, []);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -193,7 +199,7 @@ export default function AssistantPage() {
             value={input}
             onChange={e => setInput(e.target.value)}
             onKeyDown={e => e.key === "Enter" && send(input)}
-            placeholder="Ask about Bruno's health..."
+            placeholder={`Ask about ${petName}'s health...`}
             style={{
               flex: 1, background: "none", border: "none", outline: "none",
               fontSize: "13px", fontFamily: "inherit", color: C.navy,

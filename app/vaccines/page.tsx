@@ -33,7 +33,7 @@ export default function VaccinesPage() {
   const [petName, setPetName] = useState("Bruno");
 
   useEffect(() => {
-    const n = sessionStorage.getItem("petName");
+    const n = localStorage.getItem("petName") || sessionStorage.getItem("petName");
     if (n) setPetName(n);
   }, []);
 

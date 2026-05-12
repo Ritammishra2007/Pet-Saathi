@@ -38,18 +38,19 @@ export default function ProfilePage() {
   const [draft, setDraft] = useState({ name: "", email: "", city: "" });
 
   useEffect(() => {
-    // Pet data from sessionStorage
-    const name  = sessionStorage.getItem("petName")    || "Bruno";
-    const breed = sessionStorage.getItem("petBreed")   || "Golden Retriever";
-    const ageVal= sessionStorage.getItem("petAgeValue")|| "2";
-    const ageUnit=sessionStorage.getItem("petAgeUnit") || "yrs";
-    const cl    = sessionStorage.getItem("wantsChecklist") === "true";
+    const g = (k: string) => localStorage.getItem(k) || sessionStorage.getItem(k);
+    // Pet data
+    const name   = g("petName")    || "Bruno";
+    const breed  = g("petBreed")   || "Golden Retriever";
+    const ageVal = g("petAgeValue")|| "2";
+    const ageUnit= g("petAgeUnit") || "yrs";
+    const cl     = g("wantsChecklist") === "true";
     setPetName(name);
     setPetBreed(breed);
     setPetAge(ageVal ? `${ageVal} ${ageUnit}` : "");
     setWantsChecklist(cl);
-    setPetTypeEmoji(sessionStorage.getItem("petTypeEmoji") || "🐕");
-    setPetType(sessionStorage.getItem("petType") || "Dog");
+    setPetTypeEmoji(g("petTypeEmoji") || "🐕");
+    setPetType(g("petType") || "Dog");
 
     // User profile from localStorage
     const n = localStorage.getItem("userName")  || "Your Name";
