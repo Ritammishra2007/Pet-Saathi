@@ -17,17 +17,73 @@ const VETS = [
 ];
 
 const TIPS = [
-  { icon: "🩸", title: "Heavy Bleeding", text: "Apply gentle pressure with clean cloth. Do not remove cloth — add more on top." },
-  { icon: "🤢", title: "Vomiting / Diarrhoea", text: "Withhold food for 2–4 hours. Keep water available. See vet if persists >12h." },
-  { icon: "💊", title: "Possible Poisoning", text: "Note substance ingested. Do NOT induce vomiting unless directed by vet." },
-  { icon: "🌡️", title: "Heatstroke", text: "Move to shade/cool area. Wet paws, ears, neck with cool (not ice cold) water." },
-  { icon: "🦴", title: "Fracture / Limping", text: "Minimise movement. Do NOT straighten limb. Carry pet to vet immediately." },
+  {
+    icon: "🩸", title: "Heavy Bleeding",
+    text: "Apply gentle pressure with clean cloth. Do not remove cloth — add more on top.",
+    detail: [
+      "Use a clean cloth or bandage and apply firm, steady pressure on the wound.",
+      "Do NOT lift the cloth — if soaked, place another on top.",
+      "Elevate the injured limb above heart level if possible.",
+      "Keep your pet calm and still to slow blood flow.",
+      "Rush to a vet immediately — do not wait to see if it stops.",
+    ],
+    warning: "If bleeding doesn't slow within 5 minutes, go to emergency vet NOW.",
+  },
+  {
+    icon: "🤢", title: "Vomiting / Diarrhoea",
+    text: "Withhold food for 2–4 hours. Keep water available. See vet if persists >12h.",
+    detail: [
+      "Withhold food for 2–4 hours to rest the stomach.",
+      "Always keep fresh water available to prevent dehydration.",
+      "After 4 hours, offer a small amount of plain boiled chicken and rice.",
+      "Monitor for blood in vomit or stool — this is serious.",
+      "If your pet is lethargic or vomiting more than 3 times, see a vet.",
+    ],
+    warning: "If symptoms persist beyond 12 hours or worsen, visit a vet immediately.",
+  },
+  {
+    icon: "💊", title: "Possible Poisoning",
+    text: "Note substance ingested. Do NOT induce vomiting unless directed by vet.",
+    detail: [
+      "Stay calm — identify the substance ingested and the amount if possible.",
+      "Do NOT induce vomiting unless explicitly instructed by a vet.",
+      "Common pet toxins: grapes, chocolate, onions, xylitol, rat poison.",
+      "Call a vet or poison helpline immediately with the substance name.",
+      "Bring the packaging or a photo of it to the vet.",
+    ],
+    warning: "Time is critical with poisoning — call a vet before doing anything else.",
+  },
+  {
+    icon: "🌡️", title: "Heatstroke",
+    text: "Move to shade/cool area. Wet paws, ears, neck with cool (not ice cold) water.",
+    detail: [
+      "Move your pet to a cool, shaded or air-conditioned area immediately.",
+      "Wet their paws, ears, and neck with cool (NOT ice cold) water.",
+      "Offer small sips of water — do not force them to drink.",
+      "Place a wet towel under them, not over them.",
+      "Fan the pet while keeping them wet.",
+    ],
+    warning: "Heatstroke can be fatal within minutes. Get to a vet as fast as possible.",
+  },
+  {
+    icon: "🦴", title: "Fracture / Limping",
+    text: "Minimise movement. Do NOT straighten limb. Carry pet to vet immediately.",
+    detail: [
+      "Keep your pet as still and calm as possible.",
+      "Do NOT try to straighten or splint the limb yourself.",
+      "Gently wrap the area in a soft cloth to provide light support.",
+      "Carry your pet — do not let them walk on the injured limb.",
+      "Use a flat surface like a board to transport larger pets.",
+    ],
+    warning: "Any suspected fracture needs immediate X-ray and vet assessment.",
+  },
 ];
 
 export default function EmergencyPage() {
   const [aiText, setAiText] = useState("");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
+  const [selectedTip, setSelectedTip] = useState<typeof TIPS[0] | null>(null);
 
   const simulateAi = () => {
     if (!aiText.trim()) return;
@@ -208,20 +264,65 @@ export default function EmergencyPage() {
         {/* First Aid Tips */}
         <p style={{ fontSize: "11px", fontWeight: 800, color: C.navy, letterSpacing: "0.8px", margin: "16px 0 10px" }}>QUICK FIRST AID</p>
         {TIPS.map((tip, i) => (
-          <div key={i} style={{
+          <div key={i} onClick={() => setSelectedTip(tip)} style={{
             background: C.surface, borderRadius: "14px", padding: "12px 14px",
             marginBottom: "8px", boxShadow: "0 2px 8px rgba(18,16,58,0.04)",
             border: `1px solid ${C.grayLight}`,
-            display: "flex", gap: "12px", alignItems: "flex-start",
+            display: "flex", gap: "12px", alignItems: "center", cursor: "pointer",
           }}>
             <span style={{ fontSize: "22px", flexShrink: 0 }}>{tip.icon}</span>
-            <div>
+            <div style={{ flex: 1 }}>
               <p style={{ fontSize: "13px", fontWeight: 800, color: C.navy, margin: 0 }}>{tip.title}</p>
-              <p style={{ fontSize: "12px", color: C.gray, margin: "3px 0 0", lineHeight: 1.5 }}>{tip.text}</p>
+              <p style={{ fontSize: "12px", color: C.gray, margin: "2px 0 0" }}>{tip.text.slice(0, 48)}…</p>
             </div>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0 }}>
+              <path d="M5 3l4 4-4 4" stroke={C.gray} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </div>
         ))}
       </div>
+
+      {/* Tip detail modal */}
+      {selectedTip && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 100, display: "flex", alignItems: "flex-end" }}
+          onClick={() => setSelectedTip(null)}>
+          <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.4)" }} />
+          <div style={{
+            position: "relative", width: "100%", maxWidth: "430px", margin: "0 auto",
+            background: "#fff", borderRadius: "24px 24px 0 0",
+            padding: "20px 20px 100px", maxHeight: "80vh", overflowY: "auto",
+          }} onClick={e => e.stopPropagation()}>
+            <div style={{ width: "36px", height: "4px", background: C.grayLight, borderRadius: "10px", margin: "0 auto 16px" }} />
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
+              <span style={{ fontSize: "32px" }}>{selectedTip.icon}</span>
+              <h2 style={{ fontSize: "18px", fontWeight: 800, color: C.navy, margin: 0 }}>{selectedTip.title}</h2>
+            </div>
+
+            <p style={{ fontSize: "11px", fontWeight: 800, color: C.gray, letterSpacing: "0.6px", marginBottom: "10px" }}>STEPS TO FOLLOW</p>
+            {selectedTip.detail.map((step, i) => (
+              <div key={i} style={{ display: "flex", gap: "10px", marginBottom: "10px", alignItems: "flex-start" }}>
+                <div style={{
+                  width: "22px", height: "22px", borderRadius: "50%", flexShrink: 0,
+                  background: C.orangeBg, border: `1px solid rgba(249,115,22,0.2)`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}>
+                  <span style={{ fontSize: "11px", fontWeight: 800, color: C.orange }}>{i + 1}</span>
+                </div>
+                <p style={{ fontSize: "13px", color: C.navy, margin: 0, lineHeight: 1.6 }}>{step}</p>
+              </div>
+            ))}
+
+            <div style={{
+              marginTop: "16px", background: C.redBg, borderRadius: "12px",
+              padding: "12px 14px", border: `1px solid rgba(220,38,38,0.15)`,
+              display: "flex", gap: "10px", alignItems: "flex-start",
+            }}>
+              <span style={{ fontSize: "16px" }}>⚠️</span>
+              <p style={{ fontSize: "12px", color: C.red, margin: 0, lineHeight: 1.5, fontWeight: 500 }}>{selectedTip.warning}</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       <BottomNav />
     </div>
