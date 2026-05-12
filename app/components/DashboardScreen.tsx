@@ -308,7 +308,7 @@ export default function DashboardScreen() {
                     </div>
                     <div>
                       <p style={{ fontSize: "13px", fontWeight: 800, color: C.navy, marginBottom: "3px" }}>Nutrition Guide</p>
-                      <p style={{ fontSize: "11px", color: C.gray, fontWeight: 500, lineHeight: 1.4 }}>Daily feeding recommendations</p>
+                      <p style={{ fontSize: "11px", color: C.gray, fontWeight: 400, lineHeight: 1.4 }}>Daily feeding recommendations</p>
                     </div>
                     <div style={{ display: "flex", justifyContent: "flex-end" }}>
                       <div style={{
@@ -346,7 +346,7 @@ export default function DashboardScreen() {
                       <p style={{ fontSize: "13px", fontWeight: 800, color: C.navy, marginBottom: "4px" }}>Vaccination Tracker</p>
                       <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
                         <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: C.green }} />
-                        <p style={{ fontSize: "11px", color: C.gray, fontWeight: 600 }}>Up to date</p>
+                        <p style={{ fontSize: "11px", color: C.gray, fontWeight: 400 }}>Up to date</p>
                       </div>
                     </div>
                     <div style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -411,7 +411,7 @@ export default function DashboardScreen() {
                       padding: "2px 6px", letterSpacing: "0.5px",
                     }}>AI</span>
                   </div>
-                  <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", fontWeight: 500, margin: 0 }}>
+                  <p style={{ fontSize: "12px", color: "rgba(255,255,255,0.7)", fontWeight: 400, margin: 0 }}>
                     Ask anything about {petName}&apos;s health
                   </p>
                 </div>
