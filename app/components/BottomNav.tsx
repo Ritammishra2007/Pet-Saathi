@@ -35,42 +35,27 @@ export default function BottomNav() {
 
       {/* ── HOME ── */}
       <Tab href="/dashboard" label="Home" active={on("/dashboard")}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/home.png" alt="Home" width={26} height={26} style={{ objectFit: "contain", display: "block" }} />
+        <MaskIcon src="/nav-icons/home.png" active={on("/dashboard")} />
       </Tab>
 
       {/* ── VACCINE ── */}
       <Tab href="/vaccines" label="Vaccines" active={on("/vaccines")}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/vaccine.png" alt="Vaccines" width={26} height={26} style={{ objectFit: "contain", display: "block" }} />
+        <MaskIcon src="/nav-icons/vaccine.png" active={on("/vaccines")} />
       </Tab>
 
-      {/* ── EMERGENCY (centre floating) ── */}
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "3px", marginTop: "-14px" }}>
-        <Link href="/emergency" style={{ textDecoration: "none" }}>
-          <div style={{
-            width: "54px", height: "54px", borderRadius: "50%",
-            background: `linear-gradient(145deg, #FF7A30, ${ORANGE})`,
-            display: "flex", alignItems: "center", justifyContent: "center",
-            boxShadow: `0 6px 20px ${ORANGE}60, 0 0 0 4px ${ORANGE}20`,
-          }}>
-            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-              <rect x="11.5" y="5" width="3" height="16" rx="1.5" fill="white"/>
-              <rect x="5" y="11.5" width="16" height="3" rx="1.5" fill="white"/>
-            </svg>
-          </div>
-        </Link>
-        <span style={{ fontSize: "10px", fontWeight: 700, color: ORANGE, fontFamily: "inherit" }}>Emergency</span>
-      </div>
+      {/* ── EMERGENCY ── */}
+      <Tab href="/emergency" label="Emergency" active={on("/emergency")}>
+        <MaskIcon src="/nav-icons/shield.png" active={on("/emergency")} />
+      </Tab>
 
       {/* ── COMMUNITY ── */}
       <Tab href="/community" label="Community" active={on("/community")}>
-        <Image src="/community-icon.png" alt="Community" width={26} height={26} />
+        <MaskIcon src="/nav-icons/community.png" active={on("/community")} />
       </Tab>
 
       {/* ── PROFILE ── */}
       <Tab href="/profile" label="Profile" active={on("/profile")}>
-        <Image src="/profile-dog.png" alt="Profile" width={26} height={26} />
+        <MaskIcon src="/nav-icons/dog.png" active={on("/profile")} />
       </Tab>
 
     </div>
@@ -100,5 +85,23 @@ function Tab({ href, label, active, children }: {
         </span>
       </div>
     </Link>
+  );
+}
+
+function MaskIcon({ src, active, isWhite }: { src: string, active?: boolean, isWhite?: boolean }) {
+  const color = isWhite ? "white" : (active ? ORANGE : GRAY);
+  return (
+    <div style={{
+      width: "26px", height: "26px",
+      backgroundColor: color,
+      maskImage: `url(${src})`,
+      WebkitMaskImage: `url(${src})`,
+      maskSize: "contain",
+      WebkitMaskSize: "contain",
+      maskRepeat: "no-repeat",
+      WebkitMaskRepeat: "no-repeat",
+      maskPosition: "center",
+      WebkitMaskPosition: "center"
+    }} />
   );
 }

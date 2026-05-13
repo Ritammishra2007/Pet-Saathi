@@ -22,22 +22,22 @@ interface PetData {
 
 /* ─── Pet types ─── */
 const PET_TYPES = [
-  { label: "Dog",   emoji: "🐶", image: "/puppy2.webp" },
-  { label: "Cat",   emoji: "🐱", image: "/cat_picture.jpg" },
+  { label: "Dog", emoji: "🐶", image: "/puppy2.webp" },
+  { label: "Cat", emoji: "🐱", image: "/cat_picture.jpg" },
   { label: "Other", emoji: "🐾", image: "/rabbit.webp" },
 ];
 
 const OTHER_PETS = [
-  { label: "Bird",       emoji: "🐦" },
-  { label: "Rabbit",     emoji: "🐰" },
-  { label: "Fish",       emoji: "🐠" },
-  { label: "Hamster",    emoji: "🐹" },
-  { label: "Turtle",     emoji: "🐢" },
+  { label: "Bird", emoji: "🐦" },
+  { label: "Rabbit", emoji: "🐰" },
+  { label: "Fish", emoji: "🐠" },
+  { label: "Hamster", emoji: "🐹" },
+  { label: "Turtle", emoji: "🐢" },
   { label: "Guinea Pig", emoji: "🐾" },
-  { label: "Snake",      emoji: "🐍" },
-  { label: "Parrot",     emoji: "🦜" },
-  { label: "Lizard",     emoji: "🦎" },
-  { label: "Ferret",     emoji: "🐾" },
+  { label: "Snake", emoji: "🐍" },
+  { label: "Parrot", emoji: "🦜" },
+  { label: "Lizard", emoji: "🦎" },
+  { label: "Ferret", emoji: "🐾" },
 ];
 
 /* ─── Progress map ─── */
@@ -107,12 +107,12 @@ export default function OnboardingFlow() {
     setLoading(true);
     await new Promise((r) => setTimeout(r, 800));
     const petData: Record<string, string> = {
-      petName:       pet.name       || "",
-      petType:       pet.type       || "",
-      petTypeEmoji:  pet.typeEmoji  || "",
-      petBreed:      pet.breed      || "",
-      petAgeValue:   pet.ageValue   || "",
-      petAgeUnit:    pet.ageUnit,
+      petName: pet.name || "",
+      petType: pet.type || "",
+      petTypeEmoji: pet.typeEmoji || "",
+      petBreed: pet.breed || "",
+      petAgeValue: pet.ageValue || "",
+      petAgeUnit: pet.ageUnit,
       wantsChecklist: String(pet.wantsChecklist === true),
     };
     // Clear chip data from a previous session
@@ -138,15 +138,15 @@ export default function OnboardingFlow() {
         {step !== "auth" && step !== "welcome" && (
           <div className="progress-area">
             <button className="back-btn" onClick={() => {
-                const prev: Record<Step, Step> = {
-                  phone: "auth", otp: "phone", petType: "otp",
-                  petDetails: "petType", newPetQ: "petDetails",
-                  checklistQ: "newPetQ", welcome: "checklistQ", auth: "auth",
-                };
-                go(prev[step], "back");
-              }}>
-                <span style={{ fontSize: "20px" }}>←</span>
-              </button>
+              const prev: Record<Step, Step> = {
+                phone: "auth", otp: "phone", petType: "otp",
+                petDetails: "petType", newPetQ: "petDetails",
+                checklistQ: "newPetQ", welcome: "checklistQ", auth: "auth",
+              };
+              go(prev[step], "back");
+            }}>
+              <span style={{ fontSize: "20px" }}>←</span>
+            </button>
             <div className="progress-track">
               <div
                 className="progress-fill"
@@ -164,7 +164,7 @@ export default function OnboardingFlow() {
                 style={{ objectFit: "cover", objectPosition: "center top" }} priority />
               <div className="auth-hero-fade" />
 
-{/* Headline */}
+              {/* Headline */}
               <div className="auth-logo-wrap">
                 <h1 className="auth-headline">
                   Your pet&apos;s best life<br />
@@ -178,10 +178,10 @@ export default function OnboardingFlow() {
               {/* Google */}
               <button className="social-btn" onClick={() => go("petType")}>
                 <svg width="20" height="20" viewBox="0 0 24 24">
-                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
-                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" />
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                 </svg>
                 Continue with Google
               </button>
@@ -191,7 +191,7 @@ export default function OnboardingFlow() {
 
               {/* Phone */}
               <button className="phone-auth-btn" onClick={() => go("phone")}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="3" stroke="white" strokeWidth="2"/><circle cx="12" cy="18" r="1" fill="white"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="5" y="2" width="14" height="20" rx="3" stroke="white" strokeWidth="2" /><circle cx="12" cy="18" r="1" fill="white" /></svg>
                 Continue with Phone
               </button>
 
@@ -225,7 +225,7 @@ export default function OnboardingFlow() {
               <div className="country-code">
                 <Image src="/india-flag.png" alt="IN" width={20} height={14}
                   style={{ borderRadius: "2px" }}
-                  onError={() => {}} />
+                  onError={() => { }} />
                 <span style={{ fontWeight: 700, color: "#2B1D16", fontSize: "15px" }}>+91</span>
               </div>
               <input
@@ -283,7 +283,7 @@ export default function OnboardingFlow() {
               Didn&apos;t receive it?{" "}
               <button
                 className="link-btn"
-                onClick={() => { setOtp(["","","","","",""]); sendOtp(); }}
+                onClick={() => { setOtp(["", "", "", "", "", ""]); sendOtp(); }}
               >
                 Resend OTP
               </button>
@@ -326,7 +326,7 @@ export default function OnboardingFlow() {
                   <div className={`pet-bar-check ${pet.type === p.label ? "checked" : ""}`}>
                     {pet.type === p.label && (
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path d="M2.5 7l3 3 6-6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M2.5 7l3 3 6-6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     )}
                   </div>
@@ -349,19 +349,19 @@ export default function OnboardingFlow() {
                   <div className={`pet-bar-check ${pet.type !== "Dog" && pet.type !== "Cat" && pet.type !== "" ? "checked" : ""}`}>
                     {pet.type !== "Dog" && pet.type !== "Cat" && pet.type !== "" && (
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path d="M2.5 7l3 3 6-6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M2.5 7l3 3 6-6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     )}
                   </div>
                 </button>
 
                 {/* Dropdown — visible when Other is selected */}
-                {(pet.type === "Other" || (pet.type !== "Dog" && pet.type !== "Cat")) && (
+                {(pet.type === "Other" || (pet.type !== "Dog" && pet.type !== "Cat" && pet.type !== "")) && (
                   <div className="other-dropdown">
                     <div className="other-search-wrap">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                        <circle cx="11" cy="11" r="7" stroke="#A8A29E" strokeWidth="2"/>
-                        <path d="M16.5 16.5l3.5 3.5" stroke="#A8A29E" strokeWidth="2" strokeLinecap="round"/>
+                        <circle cx="11" cy="11" r="7" stroke="#A8A29E" strokeWidth="2" />
+                        <path d="M16.5 16.5l3.5 3.5" stroke="#A8A29E" strokeWidth="2" strokeLinecap="round" />
                       </svg>
                       <input
                         className="other-search"
@@ -384,7 +384,7 @@ export default function OnboardingFlow() {
                           <span className="other-option-label">{o.label}</span>
                           {pet.type === o.label && (
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                              <path d="M2.5 7l3 3 6-6" stroke="#FF8A1F" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M2.5 7l3 3 6-6" stroke="#FF8A1F" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                           )}
                         </button>
@@ -422,7 +422,7 @@ export default function OnboardingFlow() {
 
             {/* Card sheet over image */}
             <div className="details-sheet">
-              <h2 style={{ fontSize: "22px", fontWeight: 800, color: "#1A2535", margin: "0 0 4px", fontFamily: "'Playfair Display', Georgia, serif" }}>
+              <h2 style={{ fontSize: "22px", fontWeight: 800, color: "#1A2535", margin: "0 0 4px", fontFamily: "'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif" }}>
                 Tell us about them
               </h2>
               <p style={{ fontSize: "13px", color: "#A8A29E", fontWeight: 600, margin: "0 0 20px" }}>
@@ -456,29 +456,35 @@ export default function OnboardingFlow() {
               {/* Age */}
               <div className="details-field">
                 <label className="details-label">Age <span style={{ color: "#FF8A1F" }}>*</span></label>
-                <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-                  <input
-                    className="details-input"
-                    type="number"
-                    min="0"
-                    max="30"
-                    placeholder="e.g. 3"
-                    style={{ width: "90px", flex: "none" }}
-                    value={pet.ageValue}
-                    onChange={(e) => setPet({ ...pet, ageValue: e.target.value })}
-                  />
-                  <div style={{ display: "flex", gap: "8px", flex: 1 }}>
-                    {(["weeks", "months", "years"] as const).map((u) => (
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginTop: "8px" }}>
+                  {[
+                    { label: "0–8 weeks",   value: "4",  unit: "weeks"  },
+                    { label: "2–6 months",  value: "3",  unit: "months" },
+                    { label: "6–12 months", value: "9",  unit: "months" },
+                    { label: "1–3 years",   value: "2",  unit: "years"  },
+                    { label: "3–7 years",   value: "5",  unit: "years"  },
+                    { label: "7+ years",    value: "8",  unit: "years"  },
+                  ].map((opt) => {
+                    const isSelected = pet.ageValue === opt.value && pet.ageUnit === opt.unit;
+                    return (
                       <button
-                        key={u}
-                        className={`unit-btn ${pet.ageUnit === u ? "unit-active" : ""}`}
-                        onClick={() => setPet({ ...pet, ageUnit: u })}
-                        style={{ flex: 1 }}
+                        key={opt.label}
+                        onClick={() => setPet({ ...pet, ageValue: opt.value, ageUnit: opt.unit as "weeks" | "months" | "years" })}
+                        style={{
+                          padding: "10px 16px", borderRadius: "50px",
+                          border: `2px solid ${isSelected ? "#FF8A1F" : "#E8E7F0"}`,
+                          background: isSelected ? "#FFF4EC" : "white",
+                          color: isSelected ? "#FF8A1F" : "#6B7280",
+                          fontWeight: isSelected ? 800 : 600,
+                          fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
+                          transition: "all 0.18s ease",
+                          boxShadow: isSelected ? "0 4px 12px rgba(255,138,31,0.15)" : "none",
+                        }}
                       >
-                        {u}
+                        {opt.label}
                       </button>
-                    ))}
-                  </div>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -486,7 +492,16 @@ export default function OnboardingFlow() {
 
               <button
                 className={`primary-btn ${pet.name && pet.breed && pet.ageValue ? "active" : "disabled"}`}
-                onClick={() => go("newPetQ")}
+                onClick={() => {
+                  const val = parseFloat(pet.ageValue);
+                  let isNew = false;
+                  if (pet.ageUnit === "weeks" && val <= 8) isNew = true;
+                  else if (pet.ageUnit === "months" && val <= 2) isNew = true;
+                  const updatedPet = { ...pet, isNewPet: isNew };
+                  setPet(updatedPet);
+                  // Go directly to checklistQ if newborn, else welcome
+                  isNew ? go("checklistQ") : go("welcome");
+                }}
                 disabled={!pet.name || !pet.breed || !pet.ageValue}
                 style={{ marginTop: "24px" }}
               >
@@ -676,10 +691,10 @@ export default function OnboardingFlow() {
               {/* Summary card */}
               <div className="summary-card">
                 {[
-                  { icon: "🐾", label: "Type",  val: pet.type },
-                  { icon: "🏷️", label: "Name",  val: pet.name },
+                  { icon: "🐾", label: "Type", val: pet.type },
+                  { icon: "🏷️", label: "Name", val: pet.name },
                   pet.breed ? { icon: "📋", label: "Breed", val: pet.breed } : null,
-                  { icon: "📅", label: "Age",   val: `${pet.ageValue} ${pet.ageUnit}` },
+                  { icon: "📅", label: "Age", val: `${pet.ageValue} ${pet.ageUnit}` },
                   pet.wantsChecklist
                     ? { icon: "🌱", label: "Plan", val: "30-Day Care ✓" }
                     : null,
@@ -880,7 +895,7 @@ export default function OnboardingFlow() {
           backdrop-filter: blur(8px);
         }
         .auth-headline {
-          font-family: 'Playfair Display', serif;
+          font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
           font-size: 34px;
           font-weight: 700;
           color: #ffffff;
@@ -976,7 +991,7 @@ export default function OnboardingFlow() {
           box-shadow: 0 4px 14px rgba(255,138,31,0.2);
         }
         .step-title {
-          font-family: 'Playfair Display', serif;
+          font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
           font-size: 24px;
           font-weight: 700;
           color: #1A2535;
@@ -1303,7 +1318,7 @@ export default function OnboardingFlow() {
           font-size: 14px;
         }
         .welcome-title {
-          font-family: 'Playfair Display', serif;
+          font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
           font-size: 26px;
           font-weight: 700;
           color: #1A2535;

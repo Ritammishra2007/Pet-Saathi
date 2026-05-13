@@ -162,7 +162,7 @@ export default function FeatureSlider() {
         <h3
           className="text-xl mb-1"
           style={{
-            fontFamily: "'Playfair Display', Georgia, serif",
+            fontFamily: "'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif",
             fontWeight: 700,
             color: "#2B1D16",
             lineHeight: 1.25,

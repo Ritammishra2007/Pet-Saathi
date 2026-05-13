@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import BottomNav from "../components/BottomNav";
 
 const C = {
-  bg: "#F4F2EF", surface: "#FFFFFF", navy: "#12103A",
+  bg: "transparent", surface: "#FFFFFF", navy: "#12103A",
   gray: "#8A8A9A", grayLight: "#E8E7F0",
   orange: "#F97316", orangeBg: "#FFF4EC",
   green: "#16A34A", greenBg: "#F0FBF4",
@@ -30,7 +30,7 @@ export default function ReferPage() {
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
 
-      <div style={{ background: C.surface, padding: "20px 20px 16px", borderBottom: `1px solid ${C.grayLight}` }}>
+      <div style={{ background: "transparent", padding: "20px 20px 16px", borderBottom: "none" }}>
         <button onClick={() => router.back()} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", color: C.navy, fontSize: "13px", fontWeight: 700, fontFamily: "inherit", padding: 0, marginBottom: "14px" }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke={C.navy} strokeWidth="2.2" strokeLinecap="round"/></svg>
           Back
@@ -60,8 +60,8 @@ export default function ReferPage() {
         {/* Share buttons */}
         <div style={{ display: "flex", gap: "10px", marginBottom: "24px" }}>
           {[
-            { label: "WhatsApp", bg: "#25D366", emoji: "💬" },
-            { label: "Instagram", bg: "#E1306C", emoji: "📸" },
+            { label: "WhatsApp", bg: "transparent", emoji: "💬" },
+            { label: "Instagram", bg: "transparent", emoji: "📸" },
             { label: "More",     bg: C.navy,    emoji: "📤" },
           ].map((b, i) => (
             <button key={i} style={{ flex: 1, padding: "12px 8px", borderRadius: "14px", background: b.bg, border: "none", color: "white", fontSize: "12px", fontWeight: 800, cursor: "pointer", fontFamily: "inherit", display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" }}>

@@ -108,7 +108,7 @@ export default function EmergencyPage() {
 
       {/* Emergency header */}
       <div style={{
-        background: "linear-gradient(135deg, rgba(220,38,38,0.12) 0%, rgba(255,255,255,0.85) 100%)",
+        background: "transparent",
         backdropFilter: "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
         borderBottom: "1px solid rgba(220,38,38,0.15)",
@@ -148,14 +148,16 @@ export default function EmergencyPage() {
             <span style={{ fontSize: "13px", fontWeight: 700, color: C.red }}>Call Nearest Vet</span>
             <span style={{ fontSize: "11px", color: C.gray }}>Dr. Sonal · 0.8 km</span>
           </button>
-          <button style={{
-            flex: 1, padding: "14px", borderRadius: "14px",
-            background: C.orangeBg, color: C.navy,
-            border: `1px solid rgba(249,115,22,0.2)`,
-            borderLeft: `3px solid ${C.orange}`,
-            cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: "4px",
-            boxShadow: "0 2px 10px rgba(249,115,22,0.08)",
-          }}>
+          <button 
+            onClick={() => router.push("/nearby-vets")}
+            style={{
+              flex: 1, padding: "14px", borderRadius: "14px",
+              background: C.orangeBg, color: C.navy,
+              border: `1px solid rgba(249,115,22,0.2)`,
+              borderLeft: `3px solid ${C.orange}`,
+              cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: "4px",
+              boxShadow: "0 2px 10px rgba(249,115,22,0.08)",
+            }}>
             <span style={{ fontSize: "22px" }}>🗺️</span>
             <span style={{ fontSize: "13px", fontWeight: 700, color: C.orange }}>Navigate to Vet</span>
             <span style={{ fontSize: "11px", color: C.gray }}>Open in Maps</span>

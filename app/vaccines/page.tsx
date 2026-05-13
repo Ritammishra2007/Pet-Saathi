@@ -51,7 +51,7 @@ export default function VaccinesPage() {
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
 
       {/* Header */}
-      <div style={{ background: C.surface, padding: "20px 20px 0", borderBottom: `1px solid ${C.grayLight}` }}>
+      <div style={{ background: "transparent", padding: "20px 20px 0", borderBottom: "none" }}>
         <button onClick={() => router.back()} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", color: C.navy, fontSize: "13px", fontWeight: 700, fontFamily: "inherit", padding: 0, marginBottom: "14px" }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke={C.navy} strokeWidth="2.2" strokeLinecap="round"/></svg>
           Back

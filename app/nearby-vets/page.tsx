@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import BottomNav from "../components/BottomNav";
 
 const C = {
-  bg: "#F4F2EF", surface: "#FFFFFF", navy: "#12103A",
+  bg: "transparent", surface: "#FFFFFF", navy: "#12103A",
   gray: "#8A8A9A", grayLight: "#E8E7F0",
   orange: "#F97316", orangeBg: "#FFF4EC",
   green: "#16A34A", greenBg: "#F0FBF4",
@@ -35,7 +35,7 @@ export default function NearbyVetsPage() {
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
 
-      <div style={{ background: C.surface, padding: "20px 20px 16px", borderBottom: `1px solid ${C.grayLight}` }}>
+      <div style={{ background: "transparent", padding: "20px 20px 16px", borderBottom: "none" }}>
         <button onClick={() => router.back()} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", color: C.navy, fontSize: "13px", fontWeight: 700, fontFamily: "inherit", padding: 0, marginBottom: "14px" }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke={C.navy} strokeWidth="2.2" strokeLinecap="round"/></svg>
           Back
@@ -56,7 +56,44 @@ export default function NearbyVetsPage() {
         </div>
       </div>
 
-      <div style={{ flex: 1, overflowY: "auto", padding: "16px 16px 24px", display: "flex", flexDirection: "column", gap: "12px" }}>
+      {/* Mock Map */}
+      <div style={{ height: "200px", background: "#E8E7F0", margin: "0 16px 12px", borderRadius: "18px", position: "relative", overflow: "hidden", border: `1px solid ${C.grayLight}`, boxShadow: "0 4px 12px rgba(0,0,0,0.05)" }}>
+        {/* Simplified Map UI */}
+        <div style={{ position: "absolute", inset: 0, background: "url('https://api.mapbox.com/styles/v1/mapbox/light-v10/static/72.8777,19.0760,12,0/400x200?access_token=pk.eyJ1IjoiZGV2LW1hcGJveCIsImEiOiJjbTF4eXh4eHwwMHg0MmtzZ3h4eHh4eHh4In0')", backgroundSize: "cover" }} />
+        
+        {/* Pulse current location */}
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+          <div style={{ width: "12px", height: "12px", background: "#3B82F6", borderRadius: "50%", border: "2px solid white", boxShadow: "0 0 10px rgba(59,130,246,0.5)" }} />
+          <div style={{ position: "absolute", inset: -8, border: "2px solid #3B82F6", borderRadius: "50%", opacity: 0.4, animation: "pulse 2s infinite" }} />
+        </div>
+
+        {/* Vet Pins */}
+        {filtered.map((v, i) => (
+          <div key={i} style={{ 
+            position: "absolute", 
+            top: `${20 + (i * 25)}%`, 
+            left: `${30 + (i * 15)}%`,
+            display: "flex", flexDirection: "column", alignItems: "center"
+          }}>
+            <div style={{ background: "white", padding: "4px 8px", borderRadius: "8px", fontSize: "10px", fontWeight: 800, color: C.navy, boxShadow: "0 2px 6px rgba(0,0,0,0.1)", marginBottom: "2px", whiteSpace: "nowrap" }}>
+              {v.name}
+            </div>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill={v.badgeColor} stroke="white" strokeWidth="1.5"/>
+              <circle cx="12" cy="9" r="2.5" fill="white"/>
+            </svg>
+          </div>
+        ))}
+
+        <style jsx>{`
+          @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.4; }
+            100% { transform: scale(2.5); opacity: 0; }
+          }
+        `}</style>
+      </div>
+
+      <div style={{ flex: 1, overflowY: "auto", padding: "0 16px 24px", display: "flex", flexDirection: "column", gap: "12px" }}>
         {filtered.map((vet, i) => (
           <div key={i} style={{ background: C.surface, borderRadius: "18px", padding: "16px", border: `1px solid ${C.grayLight}`, boxShadow: "0 2px 10px rgba(18,16,58,0.05)" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "8px" }}>

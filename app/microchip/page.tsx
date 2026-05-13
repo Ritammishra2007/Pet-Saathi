@@ -7,7 +7,7 @@ import BottomNav from "../components/BottomNav";
 import { preserveDashboardData } from "../components/DashboardScreen";
 
 const C = {
-  bg: "#F4F2EF", surface: "#FFFFFF", navy: "#12103A",
+  bg: "transparent", surface: "#FFFFFF", navy: "#12103A",
   navyLight: "#3D3A6B", gray: "#8A8A9A", grayLight: "#E8E7F0",
   green: "#16A34A", greenBg: "#F0FBF4",
   amber: "#B45309", amberBg: "#FFFBEB",
@@ -76,7 +76,7 @@ export default function MicrochipPage() {
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", background: C.bg, fontFamily: "inherit" }}>
 
       {/* Header */}
-      <div style={{ background: C.surface, padding: "20px 20px 20px", borderBottom: `1px solid ${C.grayLight}` }}>
+      <div style={{ background: "transparent", padding: "20px 20px 20px", borderBottom: "none" }}>
         <button
           onClick={() => flow === "choose" ? router.back() : setFlow("choose")}
           style={{

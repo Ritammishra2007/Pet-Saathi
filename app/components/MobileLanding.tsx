@@ -5,14 +5,14 @@ import Link from "next/link";
 import Image from "next/image";
 
 const SLIDES = [
-  { icon: "💉", color: "#4DA8DA", bg: "#EBF5FF", title: "Track Vaccinations",   desc: "Never miss a dose that protects them."          },
-  { icon: "🥣", color: "#16A34A", bg: "#F0FBF4", title: "Nutrition Guide",       desc: "Feed them right at every stage of life."       },
-  { icon: "👥", color: "#8B5CF6", bg: "#F5F0FF", title: "Community Support",     desc: "A family of pet lovers, always with you."      },
-  { icon: "🏷️", color: "#F97316", bg: "#FFF4EC", title: "Verify Your Pet",       desc: "Microchip & ID safety for peace of mind."      },
-  { icon: "🤖", color: "#0EA5E9", bg: "#E8F7FF", title: "AI Care Assistant",     desc: "Instant answers, anytime your pet needs help." },
+  { icon: "💉", color: "#4DA8DA", bg: "transparent", title: "Track Vaccinations", desc: "Never miss a dose that protects them." },
+  { icon: "🥣", color: "#16A34A", bg: "transparent", title: "Nutrition Guide", desc: "Feed them right at every stage of life." },
+  { icon: "👥", color: "#8B5CF6", bg: "transparent", title: "Community Support", desc: "A family of pet lovers, always with you." },
+  { icon: "🏷️", color: "#F97316", bg: "transparent", title: "Verify Your Pet", desc: "Microchip & ID safety for peace of mind." },
+  { icon: "🤖", color: "#0EA5E9", bg: "transparent", title: "AI Care Assistant", desc: "Instant answers, anytime your pet needs help." },
 ];
 
-const AVATARS = ["/golden.webp", "/kitten.webp", "/puppy2.webp", "/hero-pets.webp"];
+const AVATARS = ["/golden.webp", "/kitten.webp", "/puppy2.webp"];
 
 export default function MobileLanding() {
   const [current, setCurrent] = useState(0);
@@ -37,7 +37,7 @@ export default function MobileLanding() {
   const slide = SLIDES[current];
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", fontFamily: "inherit", background: "#fff" }}>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", fontFamily: "inherit", background: "transparent" }}>
 
       {/* ── Hero photo section (top ~58%) ── */}
       <div style={{ position: "relative", height: "58vh", flexShrink: 0 }}>
@@ -46,26 +46,24 @@ export default function MobileLanding() {
         {/* Gradient: clear top → white fade at bottom */}
         <div style={{
           position: "absolute", inset: 0,
-          background: "linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0) 45%, rgba(255,255,255,0.7) 80%, #ffffff 100%)",
+          background: "linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 45%, rgba(255,255,255,0.7) 80%, #ffffff 100%)",
         }} />
+      </div>
 
-
-</div>
-
-      {/* ── Bottom content — white background ── */}
+      {/* ── Bottom content ── */}
       <div style={{ flex: 1, background: "#ffffff", padding: "18px 20px 24px", display: "flex", flexDirection: "column", gap: "14px" }}>
 
         {/* Avatar row */}
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
           {AVATARS.map((src, i) => (
             <div key={i} style={{ width: "42px", height: "42px", borderRadius: "50%", overflow: "hidden", border: "2.5px solid white", marginRight: "-10px", boxShadow: "0 2px 8px rgba(0,0,0,0.14)", flexShrink: 0 }}>
-              <Image src={src} alt="pet" width={42} height={42} style={{ objectFit: "cover", width: "100%", height: "100%" }} />
+              <Image src={src} alt="Pet" width={42} height={42} style={{ objectFit: "cover", width: "100%", height: "100%" }} />
             </div>
           ))}
           <div style={{ width: "42px", height: "42px", borderRadius: "50%", background: "#F97316", border: "2.5px solid white", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "11px", fontWeight: 800, color: "white", flexShrink: 0, marginLeft: "2px", boxShadow: "0 2px 8px rgba(249,115,22,0.4)" }}>
             10K+
           </div>
-          <p style={{ fontSize: "13px", fontWeight: 700, color: "#12103A", marginLeft: "12px" }}>pet parents trust us</p>
+          <p style={{ fontSize: "13px", fontWeight: 700, color: "#12103A", marginLeft: "12px" }}>Pet parents trust us</p>
         </div>
 
         {/* Feature card */}
@@ -100,21 +98,21 @@ export default function MobileLanding() {
         </div>
 
         {/* CTA */}
-        <div style={{ marginTop: "4px" }}>
+        <div style={{ marginTop: "4px", width: "100%" }}>
           <Link href="/onboarding" style={{ textDecoration: "none", display: "block" }}>
             <button style={{
               width: "100%", padding: "17px", borderRadius: "16px",
-              background: "linear-gradient(135deg, #2879B0 0%, #4DA8DA 100%)",
+              background: "linear-gradient(135deg, #FF9F2D 0%, #FF8A1F 100%)",
               color: "white", fontSize: "17px", fontWeight: 800,
               border: "none", cursor: "pointer", fontFamily: "inherit",
-              boxShadow: "0 8px 24px rgba(40,121,176,0.4)",
+              boxShadow: "0 8px 24px rgba(255,159,45,0.4)",
             }}>
               Get Started
             </button>
           </Link>
           <p style={{ textAlign: "center", fontSize: "13px", color: "#6B7B8D", fontWeight: 500, marginTop: "12px" }}>
             Already have an account?{" "}
-            <Link href="/login" style={{ color: "#4DA8DA", fontWeight: 700, textDecoration: "none" }}>Log in</Link>
+            <Link href="/login" style={{ color: "#FF9F2D", fontWeight: 700, textDecoration: "none" }}>Log in</Link>
           </p>
         </div>
       </div>

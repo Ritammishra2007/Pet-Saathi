@@ -9,20 +9,20 @@ import { useState, useEffect } from "react";
 
 /* ── Color tokens ── */
 const C = {
-  bg:        "transparent",
-  surface:   "rgba(255,255,255,0.55)",
-  navy:      "#151B54",
+  bg: "transparent",
+  surface: "rgba(255,255,255,0.55)",
+  navy: "#151B54",
   navyLight: "#3D3A6B",
-  gray:      "#7A7A8A",
+  gray: "#7A7A8A",
   grayLight: "rgba(232,231,240,0.6)",
-  orange:    "#FF9F2D",
-  orangeBg:  "rgba(255,159,45,0.12)",
-  green:     "#34C759",
-  greenBg:   "rgba(52,199,89,0.12)",
-  red:       "#FF3B30",
-  redBg:     "rgba(255,59,48,0.1)",
-  purple:    "#6D28D9",
-  purpleBg:  "rgba(109,40,217,0.1)",
+  orange: "#FF9F2D",
+  orangeBg: "rgba(255,159,45,0.12)",
+  green: "#34C759",
+  greenBg: "rgba(52,199,89,0.12)",
+  red: "#FF3B30",
+  redBg: "rgba(255,59,48,0.1)",
+  purple: "#6D28D9",
+  purpleBg: "rgba(109,40,217,0.1)",
 };
 
 // New random ID on every JS module load (i.e. every page reload).
@@ -36,9 +36,9 @@ export function preserveDashboardData() {
 
 export default function DashboardScreen() {
   const router = useRouter();
-  const [petName,  setPetName]  = useState("Bruno");
+  const [petName, setPetName] = useState("Bruno");
   const [petBreed, setPetBreed] = useState("Golden Retriever");
-  const [petAge,   setPetAge]   = useState("2 yrs old");
+  const [petAge, setPetAge] = useState("2 yrs old");
   const [chipVerified, setChipVerified] = useState(false);
   const [chipId, setChipId] = useState("");
   const [wantsChecklist, setWantsChecklist] = useState(true);
@@ -48,13 +48,13 @@ export default function DashboardScreen() {
   }
 
   function syncFromStorage() {
-    const name    = getVal("petName");
-    const breed   = getVal("petBreed");
-    const ageVal  = getVal("petAgeValue");
+    const name = getVal("petName");
+    const breed = getVal("petBreed");
+    const ageVal = getVal("petAgeValue");
     const ageUnit = getVal("petAgeUnit");
-    const chip    = getVal("chipVerified");
-    const id      = getVal("chipId");
-    if (name)  setPetName(name);
+    const chip = getVal("chipVerified");
+    const id = getVal("chipId");
+    if (name) setPetName(name);
     if (breed) setPetBreed(breed);
     if (ageVal && ageUnit) setPetAge(`${ageVal} ${ageUnit} old`);
     setChipVerified(chip === "true");
@@ -67,7 +67,7 @@ export default function DashboardScreen() {
     syncFromStorage();
     window.addEventListener("focus", syncFromStorage);
     return () => window.removeEventListener("focus", syncFromStorage);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -88,15 +88,17 @@ export default function DashboardScreen() {
               </h2>
             </div>
             <div style={{ position: "relative" }}>
-              <button style={{
-                width: "42px", height: "42px", borderRadius: "12px",
-                background: C.surface, border: `1px solid ${C.grayLight}`,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                cursor: "pointer", boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
-              }}>
+              <button
+                onClick={() => router.push("/notifications")}
+                style={{
+                  width: "42px", height: "42px", borderRadius: "12px",
+                  background: C.surface, border: `1px solid ${C.grayLight}`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  cursor: "pointer", boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+                }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke={C.navyLight} strokeWidth="2" strokeLinecap="round"/>
-                  <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke={C.navyLight} strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke={C.navyLight} strokeWidth="2" strokeLinecap="round" />
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke={C.navyLight} strokeWidth="2" strokeLinecap="round" />
                 </svg>
               </button>
               <div style={{
@@ -133,7 +135,7 @@ export default function DashboardScreen() {
                       flexShrink: 0, boxShadow: `0 2px 6px ${C.green}40`,
                     }}>
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                        <path d="M2 6l3 3 5-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M2 6l3 3 5-5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
                   </div>
@@ -180,7 +182,7 @@ export default function DashboardScreen() {
                       )}
                     </div>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                      <path d="M9 18l6-6-6-6" stroke={chipVerified ? C.gray : "#B45309"} strokeWidth="2" strokeLinecap="round"/>
+                      <path d="M9 18l6-6-6-6" stroke={chipVerified ? C.gray : "#B45309"} strokeWidth="2" strokeLinecap="round" />
                     </svg>
                   </div>
                 </div>
@@ -205,8 +207,8 @@ export default function DashboardScreen() {
                     boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
                   }}>
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
-                      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke={C.gray} strokeWidth="2" strokeLinecap="round"/>
-                      <circle cx="12" cy="13" r="4" stroke={C.gray} strokeWidth="2"/>
+                      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke={C.gray} strokeWidth="2" strokeLinecap="round" />
+                      <circle cx="12" cy="13" r="4" stroke={C.gray} strokeWidth="2" />
                     </svg>
                   </button>
                 </div>
@@ -235,7 +237,7 @@ export default function DashboardScreen() {
                   </div>
                   <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "8px" }}>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                      <path d="M9 18l6-6-6-6" stroke={C.grayLight} strokeWidth="2.5" strokeLinecap="round"/>
+                      <path d="M9 18l6-6-6-6" stroke={C.grayLight} strokeWidth="2.5" strokeLinecap="round" />
                     </svg>
                     <span style={{
                       fontSize: "11px", fontWeight: 700, color: C.red,
@@ -274,7 +276,7 @@ export default function DashboardScreen() {
                     </div>
                   </div>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                    <path d="M9 18l6-6-6-6" stroke={C.grayLight} strokeWidth="2.5" strokeLinecap="round"/>
+                    <path d="M9 18l6-6-6-6" stroke={C.grayLight} strokeWidth="2.5" strokeLinecap="round" />
                   </svg>
                 </div>
               </Card>
@@ -287,7 +289,7 @@ export default function DashboardScreen() {
                 <button style={{ background: "none", border: "none", fontSize: "12px", fontWeight: 700, color: C.purple, cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", gap: "2px" }}>
                   View all
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                    <path d="M9 18l6-6-6-6" stroke={C.purple} strokeWidth="2.5" strokeLinecap="round"/>
+                    <path d="M9 18l6-6-6-6" stroke={C.purple} strokeWidth="2.5" strokeLinecap="round" />
                   </svg>
                 </button>
               </div>
@@ -316,7 +318,7 @@ export default function DashboardScreen() {
                         display: "flex", alignItems: "center", justifyContent: "center",
                       }}>
                         <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
-                          <path d="M9 18l6-6-6-6" stroke={C.orange} strokeWidth="2.5" strokeLinecap="round"/>
+                          <path d="M9 18l6-6-6-6" stroke={C.orange} strokeWidth="2.5" strokeLinecap="round" />
                         </svg>
                       </div>
                     </div>
@@ -335,11 +337,11 @@ export default function DashboardScreen() {
                       display: "flex", alignItems: "center", justifyContent: "center",
                     }}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <rect x="2" y="14" width="4" height="7" rx="1.5" fill="#C4B5FD"/>
-                        <rect x="8" y="10" width="4" height="11" rx="1.5" fill="#A78BFA"/>
-                        <rect x="14" y="6" width="4" height="15" rx="1.5" fill={C.purple}/>
-                        <path d="M4 12l6-5 6-4" stroke={C.purple} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                        <circle cx="16" cy="3" r="2" fill={C.purple}/>
+                        <rect x="2" y="14" width="4" height="7" rx="1.5" fill="#C4B5FD" />
+                        <rect x="8" y="10" width="4" height="11" rx="1.5" fill="#A78BFA" />
+                        <rect x="14" y="6" width="4" height="15" rx="1.5" fill={C.purple} />
+                        <path d="M4 12l6-5 6-4" stroke={C.purple} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                        <circle cx="16" cy="3" r="2" fill={C.purple} />
                       </svg>
                     </div>
                     <div>
@@ -355,9 +357,40 @@ export default function DashboardScreen() {
                         display: "flex", alignItems: "center", justifyContent: "center",
                       }}>
                         <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
-                          <path d="M9 18l6-6-6-6" stroke={C.purple} strokeWidth="2.5" strokeLinecap="round"/>
+                          <path d="M9 18l6-6-6-6" stroke={C.purple} strokeWidth="2.5" strokeLinecap="round" />
                         </svg>
                       </div>
+                    </div>
+                  </div>
+                </Link>
+
+                {/* Nearby Vets */}
+                <Link href="/nearby-vets" style={{ textDecoration: "none", display: "flex", gridColumn: "span 2" }}>
+                  <div style={{
+                    background: "rgba(240,253,250,0.7)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", borderRadius: "24px", padding: "16px",
+                    boxShadow: "0 12px 36px rgba(13,148,136,0.15), 0 4px 12px rgba(0,0,0,0.09), inset 0 1px 0 rgba(255,255,255,0.85)", border: "1.5px solid rgba(255,255,255,0.7)",
+                    flex: 1, display: "flex", alignItems: "center", gap: "16px",
+                  }}>
+                    <div style={{
+                      width: "52px", height: "52px", borderRadius: "14px", background: "#CCFBF1",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                    }}>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#0D9488" stroke="#0D9488" strokeWidth="1"/>
+                        <circle cx="12" cy="9" r="2.5" fill="white"/>
+                      </svg>
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontSize: "14px", fontWeight: 800, color: C.navy, marginBottom: "3px" }}>Nearby Vets</p>
+                      <p style={{ fontSize: "11px", color: C.gray, fontWeight: 400 }}>Find & navigate to clinics near you</p>
+                    </div>
+                    <div style={{
+                      width: "32px", height: "32px", borderRadius: "50%", background: "#CCFBF1",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                    }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 18l6-6-6-6" stroke="#0D9488" strokeWidth="3" strokeLinecap="round" />
+                      </svg>
                     </div>
                   </div>
                 </Link>
@@ -386,18 +419,20 @@ export default function DashboardScreen() {
                   background: "rgba(255,255,255,0.06)", pointerEvents: "none",
                 }} />
 
-                {/* Stethoscope icon box */}
+                {/* AI Logo icon box */}
                 <div style={{
                   width: "48px", height: "48px", borderRadius: "14px", flexShrink: 0,
                   background: "rgba(255,255,255,0.18)",
                   display: "flex", alignItems: "center", justifyContent: "center",
+                  overflow: "hidden",
                 }}>
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                    <path d="M6 3v7a6 6 0 006 6 6 6 0 006-6V3" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-                    <path d="M6 3H4M6 3h2M18 3h-2M18 3h2" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-                    <circle cx="18" cy="17" r="3" stroke="white" strokeWidth="2"/>
-                    <path d="M12 16v1" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
+                  <div style={{ width: "36px", height: "36px", overflow: "hidden", display: "flex", alignItems: "flex-start", justifyContent: "center" }}>
+                    <img
+                      src="/ai-logo.png"
+                      alt="AI"
+                      style={{ width: "36px", height: "44px", objectFit: "cover", objectPosition: "top center", filter: "invert(1)" }}
+                    />
+                  </div>
                 </div>
 
                 <div style={{ flex: 1, zIndex: 1 }}>
@@ -422,7 +457,7 @@ export default function DashboardScreen() {
                   display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1,
                 }}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                    <path d="M9 18l6-6-6-6" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
+                    <path d="M9 18l6-6-6-6" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
                   </svg>
                 </div>
               </div>

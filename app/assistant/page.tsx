@@ -5,7 +5,7 @@ import BottomNav from "../components/BottomNav";
 import { useRouter } from "next/navigation";
 
 const C = {
-  bg: "#F4F2EF", surface: "#FFFFFF", navy: "#12103A", gray: "#8A8A9A",
+  bg: "transparent", surface: "#FFFFFF", navy: "#12103A", gray: "#8A8A9A",
   grayLight: "#E8E7F0", teal: "#0D9488", tealBg: "#F0FDFA",
   orange: "#F97316", orangeBg: "#FFF4EC",
 };
@@ -72,12 +72,11 @@ export default function AssistantPage() {
 
       {/* Header */}
       <div style={{
-        background: `linear-gradient(135deg, #0D9488, #0EA5E9)`,
-        padding: "16px 20px 20px",
-        boxShadow: "0 4px 20px rgba(13,148,136,0.25)",
+        background: "transparent", padding: "16px 20px 20px",
+        boxShadow: "none",
       }}>
         <button onClick={() => router.back()} style={{ background: "none", border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", color: "rgba(255,255,255,0.8)", fontSize: "13px", fontWeight: 700, fontFamily: "inherit", padding: 0, marginBottom: "12px" }}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="rgba(255,255,255,0.8)" strokeWidth="2.2" strokeLinecap="round"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="rgba(255,255,255,0.8)" strokeWidth="2.2" strokeLinecap="round" /></svg>
           Back
         </button>
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
@@ -87,10 +86,10 @@ export default function AssistantPage() {
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M6 3v7a6 6 0 006 6 6 6 0 006-6V3" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M6 3H4M6 3h2M18 3h-2M18 3h2" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-              <circle cx="18" cy="17" r="3" stroke="white" strokeWidth="2"/>
-              <path d="M12 16v1" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M6 3v7a6 6 0 006 6 6 6 0 006-6V3" stroke="white" strokeWidth="2" strokeLinecap="round" />
+              <path d="M6 3H4M6 3h2M18 3h-2M18 3h2" stroke="white" strokeWidth="2" strokeLinecap="round" />
+              <circle cx="18" cy="17" r="3" stroke="white" strokeWidth="2" />
+              <path d="M12 16v1" stroke="white" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </div>
           <div>
@@ -136,10 +135,17 @@ export default function AssistantPage() {
             {msg.role === "ai" && (
               <div style={{
                 width: "30px", height: "30px", borderRadius: "50%",
-                background: `linear-gradient(135deg, #0D9488, #0EA5E9)`,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: "14px", flexShrink: 0, marginRight: "8px", alignSelf: "flex-end",
-              }}>🩺</div>
+                background: "rgba(255,255,255,0.9)",
+                display: "flex", alignItems: "flex-start", justifyContent: "center",
+                flexShrink: 0, marginRight: "8px", alignSelf: "flex-end",
+                overflow: "hidden",
+              }}>
+                <img
+                  src="/ai-logo.png"
+                  alt="AI"
+                  style={{ width: "30px", height: "37px", objectFit: "cover", objectPosition: "top center" }}
+                />
+              </div>
             )}
             <div style={{
               maxWidth: "75%",
@@ -162,10 +168,19 @@ export default function AssistantPage() {
         {loading && (
           <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
             <div style={{
-              width: "30px", height: "30px", borderRadius: "50%",
-              background: `linear-gradient(135deg, #0D9488, #0EA5E9)`,
-              display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px",
-            }}>🩺</div>
+              width: "44px", height: "44px", borderRadius: "14px",
+              background: "rgba(255,255,255,0.18)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              overflow: "hidden",
+            }}>
+              <div style={{ width: "32px", height: "32px", overflow: "hidden", display: "flex", alignItems: "flex-start", justifyContent: "center" }}>
+                <img
+                  src="/ai-logo.png"
+                  alt="AI"
+                  style={{ width: "32px", height: "39px", objectFit: "cover", objectPosition: "top center", filter: "invert(1)" }}
+                />
+              </div>
+            </div>
             <div style={{
               background: C.surface, borderRadius: "18px 18px 18px 4px",
               padding: "12px 16px", border: `1px solid ${C.grayLight}`,
@@ -217,7 +232,7 @@ export default function AssistantPage() {
             }}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
         </div>
