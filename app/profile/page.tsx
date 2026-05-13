@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import BottomNav from "../components/BottomNav";
 import Image from "next/image";
 import Link from "next/link";
+import { QRCodeSVG } from "qrcode.react";
+import { motion, AnimatePresence } from "framer-motion";
+import { QrCode } from "lucide-react";
 
 const C = {
   bg: "transparent", surface: "rgba(255,255,255,0.75)", navy: "#12103A",
@@ -36,6 +39,7 @@ export default function ProfilePage() {
   const router = useRouter();
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState({ name: "", email: "", city: "" });
+  const [showQRModal, setShowQRModal] = useState(false);
 
   useEffect(() => {
     const g = (k: string) => localStorage.getItem(k) || sessionStorage.getItem(k);
@@ -141,6 +145,82 @@ export default function ProfilePage() {
         </div>
       )}
 
+      {/* QR Modal */}
+      <AnimatePresence>
+        {showQRModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+              position: "fixed", inset: 0, zIndex: 300,
+              background: "rgba(18, 16, 58, 0.85)", backdropFilter: "blur(8px)",
+              display: "flex", alignItems: "center", justifyContent: "center", padding: "20px"
+            }}
+            onClick={() => setShowQRModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              style={{
+                width: "100%", maxWidth: "340px", background: "white",
+                borderRadius: "32px", padding: "32px 24px", textAlign: "center",
+                boxShadow: "0 20px 50px rgba(0,0,0,0.3)"
+              }}
+              onClick={e => e.stopPropagation()}
+            >
+              <div style={{ marginBottom: "24px" }}>
+                <div style={{
+                  width: "64px", height: "64px", borderRadius: "20px", overflow: "hidden",
+                  margin: "0 auto 16px", border: "3px solid white", boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
+                }}>
+                  <Image src="/profile_picture.jpg" alt={petName} width={64} height={64} style={{ objectFit: "cover" }} />
+                </div>
+                <h3 style={{ fontSize: "20px", fontWeight: 900, color: C.navy, margin: "0 0 4px" }}>{petName}'s Digital ID</h3>
+                <p style={{ fontSize: "12px", color: C.gray, fontWeight: 600, margin: 0 }}>Scan to see pet details & contact owner</p>
+              </div>
+
+              <div style={{
+                background: "#F8FAFC", padding: "24px", borderRadius: "24px",
+                display: "inline-block", marginBottom: "24px", border: "1px solid #E2E8F0"
+              }}>
+                <QRCodeSVG
+                  value={`${typeof window !== 'undefined' ? window.location.origin : ''}/pet-profile`}
+                  size={180}
+                  level="H"
+                  includeMargin={false}
+                  imageSettings={{
+                    src: "/favicon.ico",
+                    x: undefined,
+                    y: undefined,
+                    height: 30,
+                    width: 30,
+                    excavate: true,
+                  }}
+                />
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                <button style={{
+                  width: "100%", padding: "14px", borderRadius: "16px",
+                  background: C.orange, color: "white", fontSize: "14px",
+                  fontWeight: 800, border: "none", cursor: "pointer",
+                }}>Download QR Code</button>
+                <button
+                  onClick={() => setShowQRModal(false)}
+                  style={{
+                    width: "100%", padding: "12px", borderRadius: "16px",
+                    background: "transparent", color: C.gray, fontSize: "13px",
+                    fontWeight: 700, border: "none", cursor: "pointer",
+                  }}
+                >Close</button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Profile header */}
       <div style={{
         background: "rgba(255,255,255,0.88)",
@@ -234,6 +314,30 @@ export default function ProfilePage() {
                 {petBreed}{petAge ? ` · ${petAge}` : ""}
               </p>
             </div>
+
+            {/* Premium Stylized QR Badge (Matching Nav Style) */}
+            <motion.div
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setShowQRModal(true)}
+              style={{
+                width: "52px", height: "52px",
+                background: C.orangeBg,
+                borderRadius: "14px",
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                cursor: "pointer",
+                border: "none",
+                flexShrink: 0,
+                position: "relative",
+              }}
+            >
+              <QrCode size={26} color={C.orange} strokeWidth={2.5} />
+              <div style={{
+                fontSize: "8px", fontWeight: 800, color: C.orange,
+                marginTop: "2px", letterSpacing: "0.5px", textTransform: "uppercase"
+              }}>QR ID</div>
+            </motion.div>
+
             {wantsChecklist && (
               <div style={{ background: C.orangeBg, borderRadius: "10px", padding: "6px 10px", textAlign: "center" }}>
                 <p style={{ fontSize: "10px", color: C.orange, fontWeight: 700, margin: 0 }}>30-Day</p>
@@ -264,6 +368,7 @@ export default function ProfilePage() {
             </div>
           </Link>
         </div>
+
 
         <p style={{ fontSize: "11px", fontWeight: 800, color: C.gray, letterSpacing: "0.8px", marginBottom: "8px" }}>MY ACCOUNT</p>
         <div style={{

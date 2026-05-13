@@ -48,6 +48,11 @@ export default function BottomNav() {
         <MaskIcon src="/nav-icons/shield.png" active={on("/emergency")} />
       </Tab>
 
+      {/* ── PET ID (QR) ── */}
+      <Tab href="/pet-profile" label="Pet ID" active={on("/pet-profile")}>
+        <MaskIcon src="/nav-icons/qr.svg" active={on("/pet-profile")} />
+      </Tab>
+
       {/* ── COMMUNITY ── */}
       <Tab href="/community" label="Community" active={on("/community")}>
         <MaskIcon src="/nav-icons/community.png" active={on("/community")} />
